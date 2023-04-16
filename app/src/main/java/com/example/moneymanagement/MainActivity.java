@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     //ok ko
     //ok chu
+    //ok nha
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
 
