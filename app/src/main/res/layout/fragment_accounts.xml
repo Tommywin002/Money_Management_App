@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_dynamic_neutral70"
-    tools:context=".Views.SettingFragment">
+    android:background="@color/material_dynamic_neutral_variant20"
+    tools:context=".Views.AccountsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Setting Fragment"
-        android:textColor="@color/black"
+        android:text="Account fragment"
         android:textSize="32sp"
+        android:textColor="@color/white"
         android:layout_gravity="center"/>
 
 </FrameLayout>
