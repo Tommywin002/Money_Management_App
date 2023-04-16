@@ -10,7 +10,7 @@ import com.example.moneymanagement.Views.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
+    //ok ko
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
 
