@@ -1,7 +1,7 @@
 package com.example.moneymanagement.itemView;
 
 
-import static com.example.moneymanagement.recycle.Recycle_Income.mcontext;
+import static com.example.moneymanagement.ViewModel.IncomeVIewModel.mcontext;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -56,7 +56,7 @@ public class IncomeItemView extends RecyclerView.ViewHolder{
         tAccount.setText(transaction.getAccount());
         tMoney.setText(transaction.getMoney() + " đ");
         tDate.setText(transaction.getDate());
-        tImg.setImageResource(Integer.parseInt(transaction.getImgId()));
+        //tImg.setImageResource(Integer.parseInt(transaction.getImgId()));
     }
 
 }

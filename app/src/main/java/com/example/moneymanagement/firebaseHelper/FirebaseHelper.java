@@ -20,9 +20,10 @@ public class FirebaseHelper {
     private List<Account> accounts = new ArrayList<>();
 
     public FirebaseHelper(){
-        String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(uId).child("Account");
+        //databaseReference = firebaseDatabase.getReference(uId).child("Account");
+        databaseReference = firebaseDatabase.getReference("Account");
     }
 
     public interface DataStatus{

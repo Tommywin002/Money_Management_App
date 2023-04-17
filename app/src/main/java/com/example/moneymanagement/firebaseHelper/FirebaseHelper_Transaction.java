@@ -21,10 +21,10 @@ public class FirebaseHelper_Transaction {
 
 
     public FirebaseHelper_Transaction(){
-        String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(uId).child("Transaction/out");
-        databaseReference2 = firebaseDatabase.getReference(uId).child("Transaction/Income");
+        databaseReference = firebaseDatabase.getReference("Transaction/out");
+        databaseReference2 = firebaseDatabase.getReference("Transaction/Income");
     }
 
     public interface DataStatus{

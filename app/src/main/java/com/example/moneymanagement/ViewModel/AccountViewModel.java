@@ -12,7 +12,7 @@ import com.example.moneymanagement.adapter.AccountAdapter;
 import java.util.List;
 
 public class AccountViewModel {
-    private Context mcontext;
+    public static Context mcontext;
     private AccountAdapter accountAdapter;
 
     // Firebase adapter <- Recycle_Account (setconfig())
