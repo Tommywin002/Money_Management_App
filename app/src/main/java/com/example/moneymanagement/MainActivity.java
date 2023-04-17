@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.accountsMnu:
                     viewPager.setCurrentItem(1);
                     break;
-                case R.id.addMnu:
+                case R.id.historyMnu:
                     viewPager.setCurrentItem(2);
                     break;
-                case R.id.analysisMnu:
+                case R.id.userMnu:
                     viewPager.setCurrentItem(3);
                     break;
                 case R.id.settingMnu:
@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
                         bottomNavigationView.getMenu().findItem(R.id.accountsMnu).setChecked(true);
                         break;
                     case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.addMnu).setChecked(true);
+                        bottomNavigationView.getMenu().findItem(R.id.historyMnu).setChecked(true);
                         break;
                     case 3:
-                        bottomNavigationView.getMenu().findItem(R.id.analysisMnu).setChecked(true);
+                        bottomNavigationView.getMenu().findItem(R.id.userMnu).setChecked(true);
                         break;
                     case 4:
                         bottomNavigationView.getMenu().findItem(R.id.settingMnu).setChecked(true);
