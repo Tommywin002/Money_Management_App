@@ -20,9 +20,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new AccountsFragment();
             case 2:
-                return new TransactionFragment();
+                return new HistoryFragment();
             case 3:
-                return new AnalysisFragment();
+                return new UserFragment();
             case 4:
                 return new SettingFragment();
             default:

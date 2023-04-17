@@ -11,14 +11,14 @@
         android:icon="@drawable/wallet"/>
 
     <item
-        android:title="Add new"
-        android:id="@+id/addMnu"
-        android:icon="@drawable/addition"/>
+        android:title="Hítory"
+        android:id="@+id/historyMnu"
+        android:icon="@drawable/history"/>
 
     <item
-        android:title="Analysis"
-        android:id="@+id/analysisMnu"
-        android:icon="@drawable/analysis"/>
+        android:title="User"
+        android:id="@+id/userMnu"
+        android:icon="@drawable/user"/>
 
     <item
         android:title="Setting"
