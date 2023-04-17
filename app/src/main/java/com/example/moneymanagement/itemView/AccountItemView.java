@@ -1,6 +1,7 @@
 package com.example.moneymanagement.itemView;
 
-import static com.example.moneymanagement.recycle.Recycle_Income.mcontext;
+
+import static com.example.moneymanagement.ViewModel.AccountViewModel.mcontext;
 
 import android.view.LayoutInflater;
 import android.view.View;

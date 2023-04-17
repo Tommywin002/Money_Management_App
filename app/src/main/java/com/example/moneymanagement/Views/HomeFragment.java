@@ -9,7 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.moneymanagement.Model.Account;
 import com.example.moneymanagement.R;
+import com.example.moneymanagement.ViewModel.AccountViewModel;
+import com.example.moneymanagement.firebaseHelper.FirebaseHelper;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,6 +70,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.rvTransaction);
+
         return view;
 
         //

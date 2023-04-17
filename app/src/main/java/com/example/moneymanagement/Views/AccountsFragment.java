@@ -3,12 +3,18 @@ package com.example.moneymanagement.Views;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.moneymanagement.Model.Account;
 import com.example.moneymanagement.R;
+import com.example.moneymanagement.ViewModel.AccountViewModel;
+import com.example.moneymanagement.firebaseHelper.FirebaseHelper;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +22,7 @@ import com.example.moneymanagement.R;
  * create an instance of this fragment.
  */
 public class AccountsFragment extends Fragment {
+    private RecyclerView recycleracc;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +68,28 @@ public class AccountsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_accounts, container, false);
+        recycleracc = view.findViewById(R.id.revAcc);
+        new FirebaseHelper().readData(new FirebaseHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(List<Account> accounts, List<String> keys) {
+                new AccountViewModel().setConfig(recycleracc, getActivity(), accounts, keys);
+            }
+
+            @Override
+            public void DataIsInsert() {
+
+            }
+
+            @Override
+            public void DataIsUpdate() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
         return view;
     }
 }
