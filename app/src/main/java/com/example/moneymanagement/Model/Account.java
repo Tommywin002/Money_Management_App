@@ -1,49 +1,38 @@
 package com.example.moneymanagement.Model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity
 public class Account {
-    @PrimaryKey
-    private int AccId;
-    @ColumnInfo(name = "Account_name")
-    private String AccName;
-    @ColumnInfo(name = "Account_money")
-    private String AccMoney;
-    @ColumnInfo(name = "Account_picture")
-    private String AccPic;
 
-    public int getAccId() {
-        return AccId;
+    private String id;
+    private String name;
+    private String money;
+
+    public Account() {
+
     }
 
-    public void setAccId(int accId) {
-        AccId = accId;
+    public String getId() {
+        return id;
     }
 
-    public String getAccName() {
-        return AccName;
+    public String getName() {
+        return name;
     }
 
-    public void setAccName(String accName) {
-        AccName = accName;
+    public String getMoney() {
+        return money;
     }
 
-    public String getAccMoney() {
-        return AccMoney;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setAccMoney(String accMoney) {
-        AccMoney = accMoney;
+    public void setAccount_name(String account_name) {
+        this.name = account_name;
     }
 
-    public String getAccPic() {
-        return AccPic;
+    public void setMoney(String money) {
+        this.money = money;
     }
 
-    public void setAccPic(String accPic) {
-        AccPic = accPic;
-    }
+
 }
