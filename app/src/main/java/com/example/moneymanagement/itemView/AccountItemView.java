@@ -20,7 +20,7 @@ public class AccountItemView extends RecyclerView.ViewHolder{
     private String key;
 
     public AccountItemView(ViewGroup parent) {
-        super(LayoutInflater.from(mcontext).inflate(R.layout.account_item, parent, false));
+        super(LayoutInflater.from(mcontext).inflate(R.layout.account_list_item, parent, false));
         tName = (TextView) itemView.findViewById(R.id.txtAccName);
         tMoney = (TextView) itemView.findViewById(R.id.txtAccMoney);
 
@@ -46,8 +46,8 @@ public class AccountItemView extends RecyclerView.ViewHolder{
 
             }
         });
-
     }
+
     public void bind(Account account, String key){
         tName.setText(account.getName());
         tMoney.setText(account.getMoney());

@@ -73,6 +73,7 @@
                     android:textSize="22dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="10dp"
+                    android:textColor="@color/gray3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="đ"
+                    android:text="₫"
                     android:textColor="@color/blue1"
                     android:textSize="30dp"
                     android:textStyle="bold"
@@ -104,8 +105,8 @@
 
                 <ImageView
                     android:id="@+id/revealImg"
-                    android:layout_width="@android:dimen/app_icon_size"
-                    android:layout_height="@android:dimen/app_icon_size"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/eye"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -13,22 +13,8 @@
     <color name="cyan1">#33cccc</color>
     <color name="gray1">#f2f2f2</color>
     <color name="gray2">#cccccc</color>
+    <color name="gray3">#808080</color>
     <color name="red1">#ff3333</color>
     <color name="red2">#ff4d4d</color>
     <color name="green1">#00e68a</color>
-    <color name="pastel_dark_blue">#779ECB</color>
-    <color name="pastel_orange">#FFB347</color>
-    <color name="peach_buff">#FFDAB9</color>
-    <color name="pastel_red">#FF6961</color>
-    <color name="pastel_indigo">#CEACE6</color>
-    <color name="pastel_magneta">#F49AC2</color>
-    <color name="pastel_gray">#CFCFC4</color>
-    <color name="pastel_mint">#CEF0CC</color>
-    <color name="pastel_pink">#DEA5A4</color>
-    <color name="pastel_violet">#CB99C9</color>
-    <color name="pastel_blue">#AEC6CF</color>
-    <color name="pastel_blue_eyes">#A1CAF1</color>
-    <color name="pastel_blue_green">#9ADEDB</color>
-    <color name="pastel_baby_blue">#89CFF0</color>
-    <color name="pastel_green">#77DD77</color>
 </resources>
