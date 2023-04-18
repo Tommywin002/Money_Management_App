@@ -151,7 +151,9 @@
                         android:id="@+id/income"
                         android:layout_width="80dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp">
+                        android:layout_margin="10dp"
+                        android:background="@drawable/income_bg"
+                        android:layout_weight="1">
 
                         <TableRow
                             android:layout_width="match_parent"
@@ -162,7 +164,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="60dp"
                                 android:padding="2dp"
-                                app:srcCompat="@drawable/coin" />
+                                app:srcCompat="@drawable/coin"/>
                         </TableRow>
 
                         <TableRow
@@ -186,7 +188,9 @@
                         android:id="@+id/cate1"
                         android:layout_width="80dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp">
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/expense_bg">
 
                         <TableRow
                             android:layout_width="match_parent"
@@ -197,7 +201,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="60dp"
                                 android:padding="2dp"
-                                app:srcCompat="@drawable/coin" />
+                                app:srcCompat="@drawable/fuel" />
                         </TableRow>
 
                         <TableRow
@@ -208,7 +212,7 @@
                                 android:id="@+id/cate1Edt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Income"
+                                android:text="Fuel"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -221,7 +225,9 @@
                         android:id="@+id/cate2"
                         android:layout_width="80dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp">
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/expense_bg">
 
                         <TableRow
                             android:layout_width="match_parent"
@@ -232,7 +238,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="60dp"
                                 android:padding="2dp"
-                                app:srcCompat="@drawable/coin" />
+                                app:srcCompat="@drawable/water" />
                         </TableRow>
 
                         <TableRow
@@ -243,7 +249,7 @@
                                 android:id="@+id/cate2Edt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Income"
+                                android:text="Water"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -256,7 +262,9 @@
                         android:id="@+id/cate3"
                         android:layout_width="80dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp">
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/expense_bg">
 
                         <TableRow
                             android:layout_width="match_parent"
@@ -267,7 +275,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="60dp"
                                 android:padding="2dp"
-                                app:srcCompat="@drawable/coin" />
+                                app:srcCompat="@drawable/bag" />
                         </TableRow>
 
                         <TableRow
@@ -278,7 +286,7 @@
                                 android:id="@+id/cate3Edt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Income"
+                                android:text="Shopping"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />

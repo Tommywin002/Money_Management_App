@@ -27,22 +27,22 @@ public class AccountItemView extends RecyclerView.ViewHolder{
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(HomeFragment.check == true){
-                        /*Intent intent = new Intent(mcontext, IncomeActivity.class);
+                /*if(HomeFragment.check == true){
+                        *//*Intent intent = new Intent(mcontext, IncomeActivity.class);
                         intent.putExtra("key", key);
                         //intent.putExtra("id", tId.getText().toString());
                         intent.putExtra("name", tName.getText().toString());
                         intent.putExtra("money", tMoney.getText().toString());
-                        mcontext.startActivity(intent);*/
+                        mcontext.startActivity(intent);*//*
                 }
                 else{
-                        /*Intent intent = new Intent(mcontext, TransactionActivity.class);
+                        *//*Intent intent = new Intent(mcontext, TransactionActivity.class);
                         intent.putExtra("key", key);
                         //intent.putExtra("id", tId.getText().toString());
                         intent.putExtra("name", tName.getText().toString());
                         intent.putExtra("money", tMoney.getText().toString());
-                        mcontext.startActivity(intent);*/
-                }
+                        mcontext.startActivity(intent);*//*
+                }*/
 
             }
         });
