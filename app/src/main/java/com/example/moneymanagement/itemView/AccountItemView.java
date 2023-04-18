@@ -20,34 +20,34 @@ public class AccountItemView extends RecyclerView.ViewHolder{
     private String key;
 
     public AccountItemView(ViewGroup parent) {
-        super(LayoutInflater.from(mcontext).inflate(R.layout.account_item, parent, false));
+        super(LayoutInflater.from(mcontext).inflate(R.layout.account_list_item, parent, false));
         tName = (TextView) itemView.findViewById(R.id.txtAccName);
         tMoney = (TextView) itemView.findViewById(R.id.txtAccMoney);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(HomeFragment.check == true){
-                        /*Intent intent = new Intent(mcontext, IncomeActivity.class);
+                /*if(HomeFragment.check == true){
+                        *//*Intent intent = new Intent(mcontext, IncomeActivity.class);
                         intent.putExtra("key", key);
                         //intent.putExtra("id", tId.getText().toString());
                         intent.putExtra("name", tName.getText().toString());
                         intent.putExtra("money", tMoney.getText().toString());
-                        mcontext.startActivity(intent);*/
+                        mcontext.startActivity(intent);*//*
                 }
                 else{
-                        /*Intent intent = new Intent(mcontext, TransactionActivity.class);
+                        *//*Intent intent = new Intent(mcontext, TransactionActivity.class);
                         intent.putExtra("key", key);
                         //intent.putExtra("id", tId.getText().toString());
                         intent.putExtra("name", tName.getText().toString());
                         intent.putExtra("money", tMoney.getText().toString());
-                        mcontext.startActivity(intent);*/
-                }
+                        mcontext.startActivity(intent);*//*
+                }*/
 
             }
         });
-
     }
+
     public void bind(Account account, String key){
         tName.setText(account.getName());
         tMoney.setText(account.getMoney());
