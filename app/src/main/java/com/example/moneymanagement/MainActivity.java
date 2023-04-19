@@ -1,20 +1,25 @@
 package com.example.moneymanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.moneymanagement.Views.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    //ok ko
-    //ok chu
-    //ok nha
+
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        viewPager = findViewById(R.id.view_pager);
+        //viewPager = findViewById(R.id.view_pager);
+        navController = Navigation.findNavController(this, R.id.fragment);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        setViewPager();
+        //NavigationUI.setupActionBarWithNavController(this, navController);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener((item -> {
+        //setViewPager();
+        /*bottomNavigationView.setOnNavigationItemSelectedListener((item -> {
             switch (item.getItemId()){
                 case R.id.homeMnu:
                     viewPager.setCurrentItem(0);
@@ -45,14 +53,20 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             return true;
-        }));
+        }));*/
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return navController.navigateUp() || super.onSupportNavigateUp();
     }
 
     private void setViewPager(){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdapter);
 
+/*
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -85,5 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+*/
     }
 }
