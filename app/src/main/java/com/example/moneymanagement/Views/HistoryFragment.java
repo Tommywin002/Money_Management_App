@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.model.AdapterClass;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
