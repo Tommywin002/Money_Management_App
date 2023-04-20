@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -26,6 +28,8 @@ public class HomeFragment extends Fragment {
     private TableLayout cate0, cate1, cate2, cate3;
     private TextView text0, text1, text2, text3;
     public static int resourceId;
+    public static String cateName;
+    public static boolean checkTr = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,10 +51,48 @@ public class HomeFragment extends Fragment {
         cate0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                checkTr = true;
+                resourceId = R.drawable.coin;
+                cateName = text0.getText().toString();
+                conductTransaction();
+            }
+        });
+
+        cate1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkTr = false;
+                resourceId = R.drawable.fuel;
+                cateName = text1.getText().toString();
+                conductTransaction();
+            }
+        });
+
+        cate2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkTr = false;
+                resourceId = R.drawable.water;
+                cateName = text2.getText().toString();
+                conductTransaction();
+            }
+        });
+
+        cate3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkTr = false;
+                resourceId = R.drawable.shopping;
+                cateName = text3.getText().toString();
+                conductTransaction();
             }
         });
 
         return view;
+    }
+
+    private  void conductTransaction(){
+        NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+        navController.navigate(R.id.account_transactionFragment);
     }
 }
