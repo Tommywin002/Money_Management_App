@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.moneymanagement.Model.Transaction;
 import com.example.moneymanagement.adapter.IncomeAdapter;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class IncomeVIewModel {
@@ -16,13 +18,29 @@ public class IncomeVIewModel {
     public static List<Transaction> income;
     public static List<String> ks;
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<Transaction> transactions, List<String> keys){
+    public void setConfig(RecyclerView recyclerView, Context context, List<Transaction> transactions, List<String> keys, int position){
         mcontext = context;
         incomeAdapter = new IncomeAdapter(transactions, keys);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(incomeAdapter);
         List<Transaction> datalist = incomeAdapter.getIncome();
         List<String> k = incomeAdapter.getKey();
+        if (position==0){
+            Collections.sort(datalist, new Comparator<Transaction>() {
+                @Override
+                public int compare(Transaction e1, Transaction e2) {
+                    return Integer.compare(Integer.parseInt(e1.getMoney()),Integer.parseInt(e2.getMoney()));
+                }
+            });
+        }
+        if (position==1){
+            Collections.sort(datalist, new Comparator<Transaction>() {
+                @Override
+                public int compare(Transaction e1, Transaction e2) {
+                    return Integer.compare(Integer.parseInt(e2.getMoney()),Integer.parseInt(e1.getMoney()));
+                }
+            });
+        }
         income = datalist;
         ks = k;
         incomeAdapter.notifyDataSetChanged();
