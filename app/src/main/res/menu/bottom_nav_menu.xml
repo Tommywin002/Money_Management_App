@@ -3,25 +3,25 @@
 
     <item
         android:title="Home"
-        android:id="@+id/homeMnu"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/homepage"/>
     <item
         android:title="Account"
-        android:id="@+id/accountsMnu"
+        android:id="@+id/accountsFragment"
         android:icon="@drawable/wallet"/>
 
     <item
         android:title="Hítory"
-        android:id="@+id/historyMnu"
+        android:id="@+id/historyFragment"
         android:icon="@drawable/history"/>
 
     <item
         android:title="User"
-        android:id="@+id/userMnu"
+        android:id="@+id/userFragment"
         android:icon="@drawable/user"/>
 
     <item
         android:title="Setting"
-        android:id="@+id/settingMnu"
+        android:id="@+id/settingFragment"
         android:icon="@drawable/setting"/>
 </menu>
