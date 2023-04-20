@@ -12,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SearchView;
 
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.moneymanagement.MainActivity;
@@ -146,10 +149,10 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(checked == false){
-                    searchIncome(s.toString());
+                    searchExpense(s.toString());
                 }
                 if(checked == true){
-                    searchExpense(s.toString());
+                    searchIncome(s.toString());
                 }
             }
 
@@ -185,6 +188,7 @@ public class HistoryFragment extends Fragment {
 
                     }
                 });
+                checked = true;
             }
         });
         outtxt.setOnClickListener(new View.OnClickListener() {
@@ -211,6 +215,7 @@ public class HistoryFragment extends Fragment {
 
                     }
                 });
+                checked = false;
             }
         });
 
