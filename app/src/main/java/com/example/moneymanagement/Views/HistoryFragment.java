@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HistoryFragment#newInstance} factory method to
+ * Use the  factory method to
  * create an instance of this fragment.
  */
 public class HistoryFragment extends Fragment {
