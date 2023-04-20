@@ -7,9 +7,6 @@
     android:background="@color/gray2"
     tools:context=".Views.AccountsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -60,7 +57,7 @@
                 android:background="@color/blue1">
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/ttEdt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="100dp"
@@ -81,7 +78,7 @@
                     android:textColor="@color/black"
                     android:textSize="24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView10"
+                    app:layout_constraintStart_toEndOf="@+id/ttEdt"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -117,7 +114,6 @@
             android:id="@+id/addAccFBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:src="@drawable/add"
             android:backgroundTint="@color/blue2"
             app:layout_constraintBottom_toBottomOf="parent"
