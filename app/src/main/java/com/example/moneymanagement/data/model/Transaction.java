@@ -1,4 +1,4 @@
-package com.example.moneymanagement.Model;
+package com.example.moneymanagement.data.model;
 
 public class Transaction {
 

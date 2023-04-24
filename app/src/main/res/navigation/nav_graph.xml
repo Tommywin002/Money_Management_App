@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.moneymanagement.Views.HomeFragment"
+        android:name="com.example.moneymanagement.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountsFragment"
-        android:name="com.example.moneymanagement.Views.AccountsFragment"
+        android:name="com.example.moneymanagement.ui.accounts.AccountsFragment"
         android:label="fragment_accounts"
         tools:layout="@layout/fragment_accounts" >
         <action
@@ -25,22 +25,22 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.example.moneymanagement.Views.HistoryFragment"
+        android:name="com.example.moneymanagement.ui.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.moneymanagement.Views.UserFragment"
+        android:name="com.example.moneymanagement.ui.user.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.moneymanagement.Views.SettingFragment"
+        android:name="com.example.moneymanagement.ui.setting.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/addUserFragment"
-        android:name="com.example.moneymanagement.Views.AddUserFragment"
+        android:name="com.example.moneymanagement.ui.accounts.AddAccountFragment"
         android:label="fragment_add_user"
         tools:layout="@layout/fragment_add_user" >
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/account_transactionFragment"
-        android:name="com.example.moneymanagement.Views.Account_transactionFragment"
+        android:name="com.example.moneymanagement.ui.home.Account_transactionFragment"
         android:label="fragment_account_transaction"
         tools:layout="@layout/fragment_account_transaction" >
         <action
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.example.moneymanagement.Views.TransactionFragment"
+        android:name="com.example.moneymanagement.ui.home.TransactionFragment"
         android:label="fragment_transaction"
         tools:layout="@layout/fragment_transaction" >
         <action

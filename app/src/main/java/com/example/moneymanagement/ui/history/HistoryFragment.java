@@ -1,8 +1,7 @@
-package com.example.moneymanagement.Views;
+package com.example.moneymanagement.ui.history;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,33 +10,20 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.SearchView;
 
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.moneymanagement.MainActivity;
-import com.example.moneymanagement.Model.Transaction;
+import com.example.moneymanagement.data.model.Transaction;
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.ViewModel.AccountViewModel;
 import com.example.moneymanagement.ViewModel.ExpendViewModel;
 import com.example.moneymanagement.ViewModel.IncomeVIewModel;
 import com.example.moneymanagement.adapter.IncomeAdapter;
 import com.example.moneymanagement.adapter.TransactionAdapter;
-import com.example.moneymanagement.firebaseHelper.FirebaseHelper;
-import com.example.moneymanagement.firebaseHelper.FirebaseHelper_Transaction;
-import com.example.moneymanagement.itemView.IncomeItemView;
-import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.ktx.Firebase;
+import com.example.moneymanagement.data.services.FirebaseHelper_Transaction;
 
 import java.util.ArrayList;
 import java.util.List;

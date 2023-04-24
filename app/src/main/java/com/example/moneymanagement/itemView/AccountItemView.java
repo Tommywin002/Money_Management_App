@@ -3,7 +3,6 @@ package com.example.moneymanagement.itemView;
 
 import static com.example.moneymanagement.ViewModel.AccountViewModel.mcontext;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.moneymanagement.Model.Account;
+import com.example.moneymanagement.data.model.Account;
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.Views.HomeFragment;
 
 public class AccountItemView extends RecyclerView.ViewHolder{
     private TextView tName;

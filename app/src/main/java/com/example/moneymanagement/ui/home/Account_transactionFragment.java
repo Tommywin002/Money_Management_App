@@ -1,4 +1,4 @@
-package com.example.moneymanagement.Views;
+package com.example.moneymanagement.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.moneymanagement.Model.Account;
+import com.example.moneymanagement.data.model.Account;
 import com.example.moneymanagement.R;
 import com.example.moneymanagement.ViewModel.AccountViewModel;
-import com.example.moneymanagement.firebaseHelper.FirebaseHelper;
+import com.example.moneymanagement.data.services.FirebaseHelper;
 
 import java.util.List;
 
