@@ -3,16 +3,15 @@ package com.example.moneymanagement.ViewModel;
 import android.content.Context;
 import android.widget.Toast;
 
-import androidx.databinding.BaseObservable;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.moneymanagement.Model.Account;
-import com.example.moneymanagement.Views.AddUserFragment;
+import com.example.moneymanagement.data.model.Account;
+import com.example.moneymanagement.ui.accounts.AddAccountFragment;
 import com.example.moneymanagement.adapter.AccountAdapter;
 import com.example.moneymanagement.adapter.AccountTransactionAdapter;
-import com.example.moneymanagement.firebaseHelper.FirebaseHelper;
+import com.example.moneymanagement.data.services.FirebaseHelper;
 
 import java.util.List;
 
@@ -56,7 +55,7 @@ public class AccountViewModel extends ViewModel {
 
             @Override
             public void DataIsUpdate() {
-                Toast.makeText(AddUserFragment.context, "Added successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddAccountFragment.context, "Added successfully", Toast.LENGTH_LONG).show();
             }
 
             @Override

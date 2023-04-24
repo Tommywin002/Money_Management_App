@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.moneymanagement.Model.Transaction;
+import com.example.moneymanagement.data.model.Transaction;
 import com.example.moneymanagement.adapter.IncomeAdapter;
 
 import java.util.Collections;

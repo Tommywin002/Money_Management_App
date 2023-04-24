@@ -1,10 +1,9 @@
-package com.example.moneymanagement.firebaseHelper;
+package com.example.moneymanagement.data.services;
 
 import androidx.annotation.NonNull;
 
-import com.example.moneymanagement.Model.Account;
+import com.example.moneymanagement.data.model.Account;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

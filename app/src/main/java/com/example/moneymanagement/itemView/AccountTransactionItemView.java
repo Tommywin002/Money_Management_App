@@ -3,21 +3,19 @@ package com.example.moneymanagement.itemView;
 import static com.example.moneymanagement.ViewModel.AccountViewModel.mcontext;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.moneymanagement.Model.Account;
+import com.example.moneymanagement.data.model.Account;
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.Views.Account_transactionFragment;
+import com.example.moneymanagement.ui.home.Account_transactionFragment;
 
 public class AccountTransactionItemView extends RecyclerView.ViewHolder{
 

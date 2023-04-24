@@ -1,7 +1,6 @@
-package com.example.moneymanagement.Views;
+package com.example.moneymanagement.ui.accounts;
 
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,7 +16,7 @@ import android.widget.ImageView;
 import com.example.moneymanagement.R;
 import com.example.moneymanagement.ViewModel.AccountViewModel;
 
-public class AddUserFragment extends Fragment {
+public class AddAccountFragment extends Fragment {
 
     private ImageView cancel, confirm;
     private EditText accMoney, accName;

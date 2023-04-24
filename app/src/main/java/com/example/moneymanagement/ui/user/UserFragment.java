@@ -1,4 +1,4 @@
-package com.example.moneymanagement.Views;
+package com.example.moneymanagement.ui.user;
 
 import android.os.Bundle;
 
@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.moneymanagement.R;
 
-public class SettingFragment extends Fragment {
+public class UserFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_setting, container, false);
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
         return view;
     }
 }

@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.moneymanagement.Model.Account;
+import com.example.moneymanagement.data.model.Account;
 import com.example.moneymanagement.itemView.AccountTransactionItemView;
 
 import java.util.List;

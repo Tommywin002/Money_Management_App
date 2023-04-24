@@ -6,13 +6,12 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.moneymanagement.Model.Account;
-import com.example.moneymanagement.Model.Transaction;
-import com.example.moneymanagement.Views.HomeFragment;
-import com.example.moneymanagement.Views.TransactionFragment;
+import com.example.moneymanagement.data.model.Account;
+import com.example.moneymanagement.data.model.Transaction;
+import com.example.moneymanagement.ui.home.TransactionFragment;
 import com.example.moneymanagement.adapter.TransactionAdapter;
-import com.example.moneymanagement.firebaseHelper.FirebaseHelper;
-import com.example.moneymanagement.firebaseHelper.FirebaseHelper_Transaction;
+import com.example.moneymanagement.data.services.FirebaseHelper;
+import com.example.moneymanagement.data.services.FirebaseHelper_Transaction;
 
 import java.util.Collections;
 import java.util.Comparator;
