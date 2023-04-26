@@ -1,10 +1,11 @@
 package com.example.moneymanagement.ui.accounts;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -18,24 +19,15 @@ import android.view.ViewGroup;
 import com.example.moneymanagement.R;
 import com.example.moneymanagement.databinding.FragmentAccountsBinding;
 import com.example.moneymanagement.model.Account;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountsFragment extends Fragment {
-    FirebaseFirestore db ;
     AccountAdapter accountAdapter;
-    List<Account> accountList = new ArrayList<>();
     FragmentAccountsBinding binding;
+    AccountsViewModel accountsViewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAccountsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
@@ -45,22 +37,16 @@ public class AccountsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        db = FirebaseFirestore.getInstance();
+
+        initUI();
+        initViewModel();
+    }
+
+    private void initUI(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         binding.revAcc.setLayoutManager(layoutManager);
         binding.revAcc.addItemDecoration(itemDecoration);
-
-        accountAdapter = new AccountAdapter(getContext(), accountList);
-        binding.revAcc.setAdapter(accountAdapter);
-        initUI();
-        accountAdapter.setDialog(new AccountAdapter.Dialog() {
-            @Override
-            public void onClick(int pos) {
-
-            }
-        });
-
 
         binding.addAccFBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,24 +55,16 @@ public class AccountsFragment extends Fragment {
                 navController.navigate(R.id.addUserFragment);
             }
         });
+
     }
 
-    private void initUI(){
-        db.collection("Account").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    private void initViewModel(){
+        accountsViewModel = new ViewModelProvider(this).get(AccountsViewModel.class);
+        accountsViewModel.getAccountLiveData().observe(requireActivity(), new Observer<List<Account>>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                accountList.clear();
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                        Account account = new Account(documentSnapshot.getString("Name"), documentSnapshot.getString("Money"));
-                        account.setId(documentSnapshot.getId());
-                        accountList.add(account);
-                    }
-                    accountAdapter.notifyDataSetChanged();
-                }
-                else {
-
-                }
+            public void onChanged(List<Account> accounts) {
+                accountAdapter = new AccountAdapter(getContext(), accounts);
+                binding.revAcc.setAdapter(accountAdapter);
             }
         });
     }
