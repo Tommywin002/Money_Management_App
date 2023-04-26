@@ -17,14 +17,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.moneymanagement.data.model.Transaction;
+import com.example.moneymanagement.model.Transaction;
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.ViewModel.ExpendViewModel;
-import com.example.moneymanagement.ViewModel.IncomeVIewModel;
-import com.example.moneymanagement.adapter.IncomeAdapter;
-import com.example.moneymanagement.adapter.TransactionAdapter;
-import com.example.moneymanagement.data.services.FirebaseHelper_Transaction;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +28,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class HistoryFragment extends Fragment {
-    private IncomeAdapter incomeAdapter = new IncomeAdapter();
-    private TransactionAdapter transactionAdapter = new TransactionAdapter();
+
     private TextView incometxt, outtxt;
 
     private EditText eSearch;
@@ -101,31 +94,7 @@ public class HistoryFragment extends Fragment {
 
             }
         });
-        new FirebaseHelper_Transaction().readData(new FirebaseHelper_Transaction.DataStatus() {
-            @Override
-            public void DataIsLoaded(List<Transaction> transactions, List<String> keys) {
 
-                
-
-            new ExpendViewModel().setConfig(recyclerView, getActivity(), transactions, keys, lastSelected);
-
-            }
-
-            @Override
-            public void DataIsInsert() {
-
-            }
-
-            @Override
-            public void DataIsUpdate() {
-
-            }
-
-            @Override
-            public void DataIsDeleted() {
-
-            }
-        });
         eSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -153,54 +122,14 @@ public class HistoryFragment extends Fragment {
         incometxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new FirebaseHelper_Transaction().readData2(new FirebaseHelper_Transaction.DataStatus() {
-                    @Override
-                    public void DataIsLoaded(List<Transaction> transactions, List<String> keys) {
-                        new IncomeVIewModel().setConfig(recyclerView, getActivity(), transactions, keys,lastSelected);
-                    }
 
-                    @Override
-                    public void DataIsInsert() {
-
-                    }
-
-                    @Override
-                    public void DataIsUpdate() {
-
-                    }
-
-                    @Override
-                    public void DataIsDeleted() {
-
-                    }
-                });
                 checked = true;
             }
         });
         outtxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new FirebaseHelper_Transaction().readData(new FirebaseHelper_Transaction.DataStatus() {
-                    @Override
-                    public void DataIsLoaded(List<Transaction> transactions, List<String> keys) {
-                        new ExpendViewModel().setConfig(recyclerView, getActivity(), transactions, keys,lastSelected);
-                    }
 
-                    @Override
-                    public void DataIsInsert() {
-
-                    }
-
-                    @Override
-                    public void DataIsUpdate() {
-
-                    }
-
-                    @Override
-                    public void DataIsDeleted() {
-
-                    }
-                });
                 checked = false;
             }
         });
@@ -209,7 +138,7 @@ public class HistoryFragment extends Fragment {
     }
 
     public void searchIncome(String text){
-        ArrayList<Transaction> search = new ArrayList<>();
+       /* ArrayList<Transaction> search = new ArrayList<>();
         ArrayList<String> searchKey = new ArrayList<>();
         for(String k : IncomeVIewModel.ks){
             searchKey.add(k);
@@ -227,11 +156,11 @@ public class HistoryFragment extends Fragment {
         }
         incomeAdapter.setDataList(search, searchKey);
         incomeAdapter.notifyDataSetChanged();
-        recyclerView.setAdapter(incomeAdapter);
+        recyclerView.setAdapter(incomeAdapter);*/
     }
 
     public void searchExpense(String text){
-        ArrayList<Transaction> search = new ArrayList<>();
+        /*ArrayList<Transaction> search = new ArrayList<>();
         ArrayList<String> searchKey = new ArrayList<>();
         for(String k : ExpendViewModel.ks){
             searchKey.add(k);
@@ -249,7 +178,7 @@ public class HistoryFragment extends Fragment {
         }
         transactionAdapter.setDataList(search, searchKey);
         transactionAdapter.notifyDataSetChanged();
-        recyclerView.setAdapter(transactionAdapter);
+        recyclerView.setAdapter(transactionAdapter);*/
     }
 
 }

@@ -13,12 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.moneymanagement.data.model.Account;
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.ViewModel.AccountViewModel;
-import com.example.moneymanagement.data.services.FirebaseHelper;
-
-import java.util.List;
 
 public class Account_transactionFragment extends Fragment {
 
@@ -33,28 +28,6 @@ public class Account_transactionFragment extends Fragment {
         context = getActivity();
         recyclerView = view.findViewById(R.id.recycleViewAcc);
         back = view.findViewById(R.id.backImg);
-
-        new FirebaseHelper().readData(new FirebaseHelper.DataStatus() {
-            @Override
-            public void DataIsLoaded(List<Account> accounts, List<String> keys) {
-                new AccountViewModel().setConfig2(recyclerView, getActivity(), accounts, keys);
-            }
-
-            @Override
-            public void DataIsInsert() {
-
-            }
-
-            @Override
-            public void DataIsUpdate() {
-
-            }
-
-            @Override
-            public void DataIsDeleted() {
-
-            }
-        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

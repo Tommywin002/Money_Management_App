@@ -1,4 +1,4 @@
-package com.example.moneymanagement.data.model;
+package com.example.moneymanagement.model;
 
 public class Account {
 
@@ -6,8 +6,9 @@ public class Account {
     private String name;
     private String money;
 
-    public Account() {
-
+    public Account(String name, String money) {
+        this.name = name;
+        this.money = money;
     }
 
     public String getId() {
