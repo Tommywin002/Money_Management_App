@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "702389629310",
+    "firebase_url": "https://moneymanagement-app-bebf5-default-rtdb.firebaseio.com",
+    "project_id": "moneymanagement-app-bebf5",
+    "storage_bucket": "moneymanagement-app-bebf5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702389629310:android:e38bea304dd33e7c2ec32f",
+        "android_client_info": {
+          "package_name": "com.example.moneymanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "702389629310-5t7funrnqscmg7vlai2cm6n7lff44do1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN1RoHPYXZaaYtms4j3e7aYIPsU87L6qo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "702389629310-5t7funrnqscmg7vlai2cm6n7lff44do1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

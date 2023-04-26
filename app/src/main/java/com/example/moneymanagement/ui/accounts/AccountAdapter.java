@@ -21,6 +21,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
     public interface Dialog{
         void onClick(int pos);
     }
+
     public Dialog getDialog(){
         return dialog;
     }
