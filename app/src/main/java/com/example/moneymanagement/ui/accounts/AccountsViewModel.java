@@ -1,4 +1,7 @@
 package com.example.moneymanagement.ui.accounts;
 
-public class AccountsViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class AccountsViewModel extends ViewModel {
+
 }

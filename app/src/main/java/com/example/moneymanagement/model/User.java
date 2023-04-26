@@ -1,4 +1,4 @@
-package com.example.moneymanagement.data.model;
+package com.example.moneymanagement.model;
 
 public class User {
 

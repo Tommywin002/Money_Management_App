@@ -18,8 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.ViewModel.ExpendViewModel;
-import com.example.moneymanagement.ui.home.HomeFragment;
 
 import java.util.Calendar;
 
@@ -80,7 +78,7 @@ public class TransactionFragment extends Fragment {
                             Toast.makeText(getActivity(), "Not enough money to carry out the transaction", Toast.LENGTH_LONG).show();
                         }
                         else{
-                            new ExpendViewModel().conductTheTransaction(bName, cateName, String.valueOf(moneyInput), dateTime.getText().toString(), String.valueOf(HomeFragment.resourceId), String.valueOf(remainedMoney), bKey);
+                            //new ExpendViewModel().conductTheTransaction(bName, cateName, String.valueOf(moneyInput), dateTime.getText().toString(), String.valueOf(HomeFragment.resourceId), String.valueOf(remainedMoney), bKey);
                             NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
                             navController.navigate(R.id.homeFragment);
                         }

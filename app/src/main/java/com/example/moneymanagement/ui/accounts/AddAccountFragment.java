@@ -12,12 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.ViewModel.AccountViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddAccountFragment extends Fragment {
-
+    private AccountsViewModel accountsViewModel;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageView cancel, confirm;
     private EditText accMoney, accName;
     public static Context context;
@@ -36,8 +47,21 @@ public class AddAccountFragment extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AccountViewModel().addNewAccount(accName.getText().toString(), accMoney.getText().toString());
-                navigateToPreviousFragment();
+                Map<String, String> item = new HashMap<>();
+                item.put("Name", accName.getText().toString().trim());
+                item.put("Money", accMoney.getText().toString().trim());
+                db.collection("Account").add(item).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        System.out.println("yep");
+                        navigateToPreviousFragment();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+
             }
         });
 
@@ -56,4 +80,5 @@ public class AddAccountFragment extends Fragment {
         NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
         navController.popBackStack();
     }
+
 }
