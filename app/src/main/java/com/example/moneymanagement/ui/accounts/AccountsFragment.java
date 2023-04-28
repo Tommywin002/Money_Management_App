@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import com.example.moneymanagement.R;
 import com.example.moneymanagement.databinding.FragmentAccountsBinding;
 import com.example.moneymanagement.model.Account;
+
 import java.util.List;
 
 public class AccountsFragment extends Fragment {
@@ -30,7 +31,6 @@ public class AccountsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAccountsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-
         return view;
     }
 

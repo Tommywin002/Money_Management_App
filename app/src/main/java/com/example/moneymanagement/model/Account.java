@@ -27,7 +27,7 @@ public class Account {
         this.id = id;
     }
 
-    public void setAccount_name(String account_name) {
+    public void setName(String account_name) {
         this.name = account_name;
     }
 
