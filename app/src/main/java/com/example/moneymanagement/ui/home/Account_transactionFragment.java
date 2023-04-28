@@ -38,5 +38,6 @@ public class Account_transactionFragment extends Fragment {
         });
 
         return view;
+
     }
 }

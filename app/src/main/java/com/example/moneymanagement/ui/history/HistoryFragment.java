@@ -17,10 +17,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.moneymanagement.model.Transaction;
+import com.example.moneymanagement.model.Expense;
 import com.example.moneymanagement.R;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,38 +31,9 @@ public class HistoryFragment extends Fragment {
     private TextView incometxt, outtxt;
 
     private EditText eSearch;
-    private ArrayList<Transaction> list;
+    private ArrayList<Expense> list;
     private RecyclerView recyclerView;
     public boolean checked = false;
-
-
-    /*private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-    public HistoryFragment() {
-        // Required empty public constructor
-    }
-
-    public static HistoryFragment newInstance(String param1, String param2) {
-        HistoryFragment fragment = new HistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }*/
 
     private Spinner spSapXep;
     private int lastSelected = -1;

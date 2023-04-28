@@ -1,16 +1,21 @@
-package com.example.moneymanagement.ui.home;
+package com.example.moneymanagement.ui.home.transaction;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,50 +23,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.moneymanagement.R;
+import com.example.moneymanagement.databinding.FragmentTransactionBinding;
+import com.example.moneymanagement.model.Account;
+import com.example.moneymanagement.ui.accounts.AccountsViewModel;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class TransactionFragment extends Fragment {
 
-    private TextView accountName, categoryName, dateTime;
-    private EditText moneyEdt, noteEdt;
-    private ImageView back, conduct;
-    private String bKey, bName, bMoney, cateName;
-    public static Context context;
+    private FragmentTransactionBinding binding;
+    private TransactionViewModel transactionViewModel;
+    private AccountsViewModel accountsViewModel;
+    private List<Account> lstAccount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_transaction, container, false);
-        accountName = view.findViewById(R.id.accountName);
-        categoryName = view.findViewById(R.id.categoryName);
-        dateTime = view.findViewById(R.id.dateTxt);
-        moneyEdt = view.findViewById(R.id.edtMoneyInput);
-        noteEdt = view.findViewById(R.id.noteEdt);
-        back = view.findViewById(R.id.backImg);
-        conduct = view.findViewById(R.id.conductImg);
-        context = getContext();
+        binding = FragmentTransactionBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        return view;
 
-        Bundle bundle = getArguments();
-        bKey = bundle.getString("key");
-        bName = bundle.getString("name");
-        bMoney = bundle.getString("money");
-
-        accountName.setText(bName);
-        cateName = HomeFragment.cateName;
-        categoryName.setText(cateName);
-
-        getCurrentDate(dateTime);
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
-                navController.popBackStack();
-            }
-        });
-
-        conduct.setOnClickListener(new View.OnClickListener() {
+        /*conduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(moneyEdt.getText().toString().length() == 0){
@@ -85,9 +70,40 @@ public class TransactionFragment extends Fragment {
                     }
                 }
             }
-        });
+        });*/
+    }
 
-        return view;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initUI();
+        initViewModel();
+    }
+
+    private void initUI(){
+        binding.backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+                navController.popBackStack();
+            }
+        });
+    }
+
+
+    private void initViewModel(){
+        /*ArrayAdapter<String> listAccName = accountsViewModel.getAccNames();
+        listAccName.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerAccount.setAdapter(listAccName);*/
+        transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
+        transactionViewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, strings);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                binding.spinnerAccount.setAdapter(adapter);
+            }
+        });
     }
 
     private void getCurrentDate(TextView textView){

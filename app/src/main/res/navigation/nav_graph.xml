@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.example.moneymanagement.ui.home.TransactionFragment"
+        android:name="com.example.moneymanagement.ui.home.transaction.TransactionFragment"
         android:label="fragment_transaction"
         tools:layout="@layout/fragment_transaction" >
         <action
