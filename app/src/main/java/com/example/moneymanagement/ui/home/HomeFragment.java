@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import com.example.moneymanagement.R;
 import com.example.moneymanagement.adapter.IncomeAdapter;
 import com.example.moneymanagement.databinding.FragmentHomeBinding;
+import com.example.moneymanagement.iSupport.OnItemClickListener;
 import com.example.moneymanagement.model.Income;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class HomeFragment extends Fragment {
 
     private void conductTransaction(){
         NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
-        navController.navigate(R.id.transactionFragment);
+        navController.navigate(R.id.account_transactionFragment);
     }
 
     private void initUI(){

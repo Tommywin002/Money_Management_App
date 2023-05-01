@@ -45,4 +45,8 @@ public class IncomeViewModel extends ViewModel {
         });
         return lstIncomeLiveData;
     }
+
+    public void onItemClick(Income income){
+        System.out.println("AHAHAHHAHAHAHAHAHHA");
+    }
 }

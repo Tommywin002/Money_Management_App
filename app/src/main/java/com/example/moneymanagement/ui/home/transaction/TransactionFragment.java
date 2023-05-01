@@ -78,6 +78,7 @@ public class TransactionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initUI();
         initViewModel();
+        initData();
     }
 
     private void initUI(){
@@ -92,9 +93,6 @@ public class TransactionFragment extends Fragment {
 
 
     private void initViewModel(){
-        /*ArrayAdapter<String> listAccName = accountsViewModel.getAccNames();
-        listAccName.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spinnerAccount.setAdapter(listAccName);*/
         transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
         transactionViewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
@@ -104,6 +102,12 @@ public class TransactionFragment extends Fragment {
                 binding.spinnerAccount.setAdapter(adapter);
             }
         });
+    }
+
+    private void initData(){
+        Bundle bundle = getArguments();
+        binding.accountName.setText(bundle.getString("account"));
+        binding.categoryName.setText(bundle.getString("money"));
     }
 
     private void getCurrentDate(TextView textView){

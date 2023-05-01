@@ -4,15 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.moneymanagement.R;
 import com.example.moneymanagement.databinding.IncomeItemBinding;
-import com.example.moneymanagement.model.Account;
+import com.example.moneymanagement.iSupport.OnItemClickListener;
 import com.example.moneymanagement.model.Income;
 import com.example.moneymanagement.ui.accounts.AccountAdapter;
 
@@ -48,6 +46,15 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
         holder.binding.txtAccount.setText(incomeList.get(position).getAccount());
         holder.binding.txtDate.setText(incomeList.get(position).getDate());
         holder.binding.imgIncome.setImageResource(Integer.parseInt(incomeList.get(position).getImgId()));
+        final Income income = incomeList.get(position);
+        holder.binding.itemLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String account = holder.binding.txtAccount.getText().toString();
+                String category = holder.binding.txtCategory.getText().toString();
+                Toast.makeText(context, account + " - " + category, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -55,13 +62,14 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
         return incomeList.size();
     }
 
-    public class IncomeViewHolder extends RecyclerView.ViewHolder{
+    public class IncomeViewHolder extends RecyclerView.ViewHolder {
+
         private IncomeItemBinding binding;
 
         public IncomeViewHolder(@NonNull IncomeItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-
         }
+
     }
 }
