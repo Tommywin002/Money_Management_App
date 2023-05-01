@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginRight="1dp"
     android:layout_marginLeft="1dp"
-    android:background="@drawable/account_background">
+    android:background="@drawable/account_background"
+    android:id="@+id/expense_layout">
 
     <TextView
         android:id="@+id/txtCategory"
@@ -17,7 +18,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/img"
+        app:layout_constraintStart_toEndOf="@+id/imgExpense"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -28,7 +29,7 @@
         android:text="Account"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/img"
+        app:layout_constraintStart_toEndOf="@+id/imgExpense"
         app:layout_constraintTop_toBottomOf="@+id/txtCategory" />
 
     <TextView
@@ -74,7 +75,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/img"
+        android:id="@+id/imgExpense"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:background="@drawable/category_item_img"

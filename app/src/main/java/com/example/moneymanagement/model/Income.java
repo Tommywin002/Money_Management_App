@@ -1,6 +1,7 @@
 package com.example.moneymanagement.model;
 
 public class Income {
+
     private String id;
     private String account;
     private String category;

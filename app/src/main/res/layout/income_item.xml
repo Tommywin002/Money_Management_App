@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginRight="1dp"
     android:layout_marginLeft="1dp"
-    android:background="@drawable/account_background">
+    android:background="@drawable/account_background"
+    android:id="@+id/itemLayout">
 
     <TextView
         android:id="@+id/txtCategory"
