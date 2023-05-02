@@ -26,7 +26,7 @@
 
                 <EditText
                     android:id="@+id/edtSearch"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
@@ -34,6 +34,8 @@
                     android:inputType="textPersonName"
                     android:paddingLeft="20dp"
                     android:textSize="24sp" />
+
+
 
             </LinearLayout>
         </LinearLayout>
@@ -95,7 +97,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
                     app:layout_constraintStart_toEndOf="@+id/exTxt"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:entries="@array/sort_array"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
