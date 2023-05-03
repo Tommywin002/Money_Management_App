@@ -1,4 +1,6 @@
-package com.example.moneymanagement.ui.home;
+package com.example.moneymanagement.ui.home.income;
+
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -35,18 +37,13 @@ public class IncomeViewModel extends ViewModel {
                     Income income = new Income(account, category, money, date, imgId);
                     income.setId(documentSnapshot.getId());
                     lstIncome.add(income);
-                    System.out.println(documentSnapshot.getId());
                 }
                 lstIncomeLiveData.postValue(lstIncome);
             }
             else{
-
+                Log.d("Error", "Load data failed");
             }
         });
         return lstIncomeLiveData;
-    }
-
-    public void onItemClick(Income income){
-        System.out.println("AHAHAHHAHAHAHAHAHHA");
     }
 }

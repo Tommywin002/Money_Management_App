@@ -55,12 +55,14 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         holder.binding.accItemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String id = accountList.get(position).getId();
                 String account = holder.binding.txtAccName.getText().toString();
                 String money = holder.binding.txtAccMoney.getText().toString();
                 Toast.makeText(context, account + " - " + money, Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
                 bundle.putString("account", account);
                 bundle.putString("money", money);
+                bundle.putString("id", id);
                 NavController navController = Navigation.findNavController((Activity) context, R.id.fragment);
                 navController.navigate(R.id.transactionFragment, bundle);
             }

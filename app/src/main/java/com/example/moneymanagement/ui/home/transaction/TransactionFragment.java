@@ -17,17 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.moneymanagement.R;
 import com.example.moneymanagement.databinding.FragmentTransactionBinding;
-import com.example.moneymanagement.model.Account;
-import com.example.moneymanagement.ui.accounts.AccountsViewModel;
-
-import org.checkerframework.checker.units.qual.A;
+import com.example.moneymanagement.ui.home.category.DataHolder;
 
 import java.util.Calendar;
 import java.util.List;
@@ -36,41 +30,16 @@ public class TransactionFragment extends Fragment {
 
     private FragmentTransactionBinding binding;
     private TransactionViewModel transactionViewModel;
-    private AccountsViewModel accountsViewModel;
-    private List<Account> lstAccount;
+    public String account, category, money, img, date, type, id;
+    public static Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentTransactionBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        context = getContext();
         return view;
-
-        /*conduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(moneyEdt.getText().toString().length() == 0){
-                    Toast.makeText(getActivity(), "Please type in the amount of money", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    if(HomeFragment.checkTr == true){
-
-                    }
-                    else{
-                        Long moneyInput = Long.parseLong(moneyEdt.getText().toString());
-                        Long remainedMoney = Long.parseLong(bMoney) - moneyInput;
-                        if(remainedMoney < 0){
-                            Toast.makeText(getActivity(), "Not enough money to carry out the transaction", Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            //new ExpendViewModel().conductTheTransaction(bName, cateName, String.valueOf(moneyInput), dateTime.getText().toString(), String.valueOf(HomeFragment.resourceId), String.valueOf(remainedMoney), bKey);
-                            NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
-                            navController.navigate(R.id.homeFragment);
-                        }
-                    }
-                }
-            }
-        });*/
     }
 
     @Override
@@ -78,36 +47,54 @@ public class TransactionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initUI();
         initViewModel();
-        initData();
     }
 
     private void initUI(){
-        binding.backImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
-                navController.popBackStack();
-            }
-        });
-    }
 
+        initData();
+
+        binding.backImg.setOnClickListener(view-> {
+            NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+            navController.popBackStack();
+        });
+
+        binding.categoryName.setOnClickListener(view->{
+            NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+            navController.navigate(R.id.categoryFragment);
+        });
+
+        binding.conductImg.setOnClickListener(view->{
+            conductTransaction();
+        });
+
+    }
 
     private void initViewModel(){
         transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
-        transactionViewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+        /*transactionViewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, strings);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 binding.spinnerAccount.setAdapter(adapter);
             }
-        });
+        });*/
     }
 
     private void initData(){
+        category = DataHolder.getInstance().getCategoryName();
+        img = DataHolder.getInstance().getImgId();
+        type = DataHolder.getInstance().getType();
+        binding.categoryName.setText(category);
+        binding.textView10.setText(type);
+
         Bundle bundle = getArguments();
-        binding.accountName.setText(bundle.getString("account"));
-        binding.categoryName.setText(bundle.getString("money"));
+        account = bundle.getString("account");
+        money = bundle.getString("money");
+        id = bundle.getString("id");
+        binding.accountName.setText(account);
+
+        getCurrentDate(binding.dateTxt);
     }
 
     private void getCurrentDate(TextView textView){
@@ -119,7 +106,7 @@ public class TransactionFragment extends Fragment {
         String currentDate = String.format("%02d/%02d/%d", day, month, year);
         textView.setText(currentDate);
 
-        textView.setOnClickListener(new View.OnClickListener() {
+        /*textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Lấy ngày hiện tại của hệ thống
@@ -139,6 +126,13 @@ public class TransactionFragment extends Fragment {
                 datePickerDialog.show();
                 System.out.println(textView.getText().toString());
             }
-        });
+        });*/
+    }
+
+    private void conductTransaction(){
+        int tMoney = Integer.parseInt(binding.edtMoneyInput.getText().toString());
+        int newMoney = type.contains("Income") ? Integer.parseInt(money) + tMoney : Integer.parseInt(money) - tMoney;
+        String date = String.valueOf(binding.dateTxt.getText());
+        transactionViewModel.addTransaction(account, category, date, "0", String.valueOf(tMoney), type, id, String.valueOf(newMoney));
     }
 }

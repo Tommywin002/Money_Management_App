@@ -1,4 +1,4 @@
-package com.example.moneymanagement.adapter;
+package com.example.moneymanagement.ui.home.expense;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,9 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneymanagement.databinding.ExpenseItemBinding;
-import com.example.moneymanagement.databinding.IncomeItemBinding;
 import com.example.moneymanagement.model.Expense;
-import com.example.moneymanagement.model.Income;
 import com.example.moneymanagement.ui.accounts.AccountAdapter;
 
 import java.util.List;
@@ -47,7 +45,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         holder.binding.txtAccount.setText(expenseList.get(position).getAccount());
         holder.binding.txtDate.setText(expenseList.get(position).getDate());
         holder.binding.imgExpense.setImageResource(Integer.parseInt(expenseList.get(position).getImgId()));
-        final Expense expense = expenseList.get(position);
         holder.binding.expenseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

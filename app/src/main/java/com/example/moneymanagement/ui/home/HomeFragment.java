@@ -18,18 +18,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.adapter.IncomeAdapter;
+import com.example.moneymanagement.ui.home.expense.ExpenseAdapter;
+import com.example.moneymanagement.ui.home.expense.ExpenseViewModel;
+import com.example.moneymanagement.ui.home.income.IncomeAdapter;
 import com.example.moneymanagement.databinding.FragmentHomeBinding;
-import com.example.moneymanagement.iSupport.OnItemClickListener;
+import com.example.moneymanagement.model.Expense;
 import com.example.moneymanagement.model.Income;
+import com.example.moneymanagement.ui.home.income.IncomeViewModel;
 
 import java.util.List;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private IncomeAdapter incomeAdapter;
+    private ExpenseAdapter expenseAdapter;
     private IncomeViewModel incomeViewModel;
-    public static boolean checkTr = false;
+    private ExpenseViewModel expenseViewModel;
+    public static boolean check = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,11 +48,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initUI();
         initViewModel();
-    }
-
-    private void conductTransaction(){
-        NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
-        navController.navigate(R.id.account_transactionFragment);
+        binding.rvTransaction.invalidate();
     }
 
     private void initUI(){
@@ -56,19 +57,51 @@ public class HomeFragment extends Fragment {
         binding.rvTransaction.setLayoutManager(layoutManager);
         binding.rvTransaction.addItemDecoration(itemDecoration);
 
-        binding.income.setOnClickListener(view->{
-           conductTransaction();
+        binding.swapImg.setOnClickListener(view->{
+            if(check == true){
+                check = false;
+                binding.rvTransaction.invalidate();
+            }
+            else if(check == false){
+                check = true;
+                binding.rvTransaction.invalidate();
+            }
+        });
+
+        binding.addFBtn.setOnClickListener(view->{
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
+            navController.navigate(R.id.account_transactionFragment);
         });
     }
 
     private void initViewModel(){
-        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
-        incomeViewModel.getIncomeLiveData().observe(requireActivity(), new Observer<List<Income>>() {
-            @Override
-            public void onChanged(List<Income> incomes) {
-                incomeAdapter = new IncomeAdapter(getContext(), incomes);
-                binding.rvTransaction.setAdapter(incomeAdapter);
-            }
-        });
+
+        if(check == true){
+            incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+            incomeViewModel.getIncomeLiveData().observe(requireActivity(), new Observer<List<Income>>() {
+                @Override
+                public void onChanged(List<Income> incomes) {
+                    incomeAdapter = new IncomeAdapter(getContext(), incomes);
+                    binding.rvTransaction.setAdapter(incomeAdapter);
+                }
+            });
+        }
+        else{
+            expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
+            expenseViewModel.getExpenseLiveData().observe(requireActivity(), new Observer<List<Expense>>() {
+                @Override
+                public void onChanged(List<Expense> expenses) {
+                    expenseAdapter = new ExpenseAdapter(getContext(), expenses);
+                    binding.rvTransaction.setAdapter(expenseAdapter);
+                }
+            });
+        }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.rvTransaction.invalidate();
     }
 }
