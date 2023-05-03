@@ -1,4 +1,4 @@
-package com.example.moneymanagement.adapter;
+package com.example.moneymanagement.ui.home.income;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneymanagement.databinding.IncomeItemBinding;
-import com.example.moneymanagement.iSupport.OnItemClickListener;
 import com.example.moneymanagement.model.Income;
 import com.example.moneymanagement.ui.accounts.AccountAdapter;
 
@@ -46,7 +45,6 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
         holder.binding.txtAccount.setText(incomeList.get(position).getAccount());
         holder.binding.txtDate.setText(incomeList.get(position).getDate());
         holder.binding.imgIncome.setImageResource(Integer.parseInt(incomeList.get(position).getImgId()));
-        final Income income = incomeList.get(position);
         holder.binding.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
