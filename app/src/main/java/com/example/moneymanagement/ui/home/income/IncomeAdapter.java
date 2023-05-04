@@ -9,7 +9,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.moneymanagement.databinding.IncomeItemBinding;
+import com.example.moneymanagement.model.Expense;
 import com.example.moneymanagement.model.Income;
 import com.example.moneymanagement.ui.accounts.AccountAdapter;
 
@@ -30,6 +32,11 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
         this.incomeList = incomeList;
     }
 
+    public void setDatalist(List<Income> incomeList){
+        this.incomeList = incomeList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public IncomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +51,7 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
         holder.binding.txtMoney.setText(incomeList.get(position).getMoney());
         holder.binding.txtAccount.setText(incomeList.get(position).getAccount());
         holder.binding.txtDate.setText(incomeList.get(position).getDate());
-        holder.binding.imgIncome.setImageResource(Integer.parseInt(incomeList.get(position).getImgId()));
+        Glide.with(context).load(incomeList.get(position).getImgId()).into(holder.binding.imgIncome);
         holder.binding.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

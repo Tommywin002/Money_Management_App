@@ -62,11 +62,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:alpha="0.8"
         android:background="@drawable/transaction_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:alpha="0.8"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -90,7 +91,7 @@
                 android:id="@+id/accountName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="10dp"
                 android:text="choose account"
                 android:textColor="@color/black"
                 android:textSize="24dp"
@@ -102,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="10dp"
                 android:text="Category:"
                 android:textColor="@color/black"
                 android:textSize="24dp"
@@ -112,37 +113,37 @@
 
             <TextView
                 android:id="@+id/categoryName"
-                android:background="@drawable/input_money_bg"
-                android:layout_width="250dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="23dp"
-                android:layout_marginTop="3dp"
-                android:hint="choose category"
-                android:paddingLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_money_bg"
+                android:hint="click to choose category"
+                android:padding="5dp"
                 android:textColor="@color/black"
                 android:textSize="24dp"
-                app:layout_constraintStart_toEndOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/accountName" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <TextView
                 android:id="@+id/textview19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:text="Date:"
                 android:textColor="@color/black"
                 android:textSize="24dp"
                 android:textStyle="bold|italic"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintTop_toBottomOf="@+id/categoryName" />
 
             <TextView
                 android:id="@+id/dateTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:text="date"
                 android:textColor="@color/black"
                 android:textSize="24dp"
@@ -150,12 +151,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/categoryName" />
 
             <TextView
-                android:id="@+id/textview20"
+                android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
-                android:text="Expense money:"
+                android:layout_marginTop="10dp"
+                android:text="Note:"
                 android:textColor="@color/black"
                 android:textSize="24dp"
                 android:textStyle="bold|italic"
@@ -163,55 +164,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/textview19" />
 
             <EditText
-                android:id="@+id/edtMoneyInput"
-                android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/input_money_bg"
-                android:ems="10"
-                android:hint="input here"
-                android:inputType="number"
-                android:paddingRight="10dp"
-                android:textAlignment="textEnd"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textview20" />
-
-            <TextView
-                android:id="@+id/valueTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="₫"
-                android:textColor="@color/black"
-                android:textSize="28dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0."
-                app:layout_constraintStart_toEndOf="@+id/edtMoneyInput"
-                app:layout_constraintTop_toBottomOf="@+id/textview20"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"/>
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
-                android:text="Note:"
-                android:textColor="@color/black"
-                android:textSize="24dp"
-                android:textStyle="bold|italic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtMoneyInput" />
-
-            <EditText
                 android:id="@+id/noteEdt"
                 android:layout_width="370dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/input_money_bg"
                 android:hint="note here"
                 android:inputType="textMultiLine"
@@ -225,11 +181,16 @@
 
             <ImageView
                 android:id="@+id/imgcheck"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categoryName"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintHorizontal_bias="0.703"
+                app:layout_constraintStart_toEndOf="@+id/categoryName"
+                app:layout_constraintTop_toBottomOf="@+id/textView18"
+                app:srcCompat="@drawable/question"
+                tools:src="@drawable/question"
+                tools:srcCompat="@drawable/question" />
 
             <!--<TextView
                 android:id="@+id/textView14"
@@ -255,5 +216,61 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray2"
+        android:paddingBottom="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <EditText
+            android:id="@+id/edtMoneyInput"
+            android:layout_width="360dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input_money_bg"
+            android:ems="10"
+            android:hint="input here"
+            android:inputType="number"
+            android:paddingRight="10dp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview" />
+
+        <TextView
+            android:id="@+id/valueTxt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="₫"
+            android:textColor="@color/black"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/edtMoneyInput"
+            app:layout_constraintTop_toBottomOf="@+id/textview" />
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Money:"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
