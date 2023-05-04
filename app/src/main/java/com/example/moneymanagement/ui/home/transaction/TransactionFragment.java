@@ -83,6 +83,7 @@ public class TransactionFragment extends Fragment {
     }
 
     private void initData(){
+
         category = DataHolder.getInstance().getCategoryName();
         img = DataHolder.getInstance().getImgId();
         type = DataHolder.getInstance().getType();
@@ -135,6 +136,6 @@ public class TransactionFragment extends Fragment {
         int tMoney = Integer.parseInt(binding.edtMoneyInput.getText().toString());
         int newMoney = type.contains("Income") ? Integer.parseInt(money) + tMoney : Integer.parseInt(money) - tMoney;
         String date = String.valueOf(binding.dateTxt.getText());
-        transactionViewModel.addTransaction(account, category, date, "0", String.valueOf(tMoney), type, id, String.valueOf(newMoney));
+        transactionViewModel.addTransaction(account, category, date, img, String.valueOf(tMoney), type, id, String.valueOf(newMoney));
     }
 }

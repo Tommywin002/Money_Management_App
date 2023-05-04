@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.moneymanagement.databinding.ExpenseItemBinding;
 import com.example.moneymanagement.model.Expense;
 import com.example.moneymanagement.ui.accounts.AccountAdapter;
@@ -30,6 +31,11 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         this.expenseList = expenseList;
     }
 
+    public void setDatalist(List<Expense> expenseList){
+        this.expenseList = expenseList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ExpenseAdapter.ExpenseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +50,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         holder.binding.txtMoney.setText(expenseList.get(position).getMoney());
         holder.binding.txtAccount.setText(expenseList.get(position).getAccount());
         holder.binding.txtDate.setText(expenseList.get(position).getDate());
-        holder.binding.imgExpense.setImageResource(Integer.parseInt(expenseList.get(position).getImgId()));
+        Glide.with(context).load(expenseList.get(position).getImgId()).into(holder.binding.imgExpense);
         holder.binding.expenseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

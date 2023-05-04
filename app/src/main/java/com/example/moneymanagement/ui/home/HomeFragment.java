@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
     private ExpenseAdapter expenseAdapter;
     private IncomeViewModel incomeViewModel;
     private ExpenseViewModel expenseViewModel;
-    public static boolean check = true;
+    public static boolean check = true, check1 = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +48,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initUI();
         initViewModel();
-        binding.rvTransaction.invalidate();
     }
 
     private void initUI(){
@@ -58,14 +57,7 @@ public class HomeFragment extends Fragment {
         binding.rvTransaction.addItemDecoration(itemDecoration);
 
         binding.swapImg.setOnClickListener(view->{
-            if(check == true){
-                check = false;
-                binding.rvTransaction.invalidate();
-            }
-            else if(check == false){
-                check = true;
-                binding.rvTransaction.invalidate();
-            }
+            changeData(check1);
         });
 
         binding.addFBtn.setOnClickListener(view->{
@@ -75,16 +67,28 @@ public class HomeFragment extends Fragment {
     }
 
     private void initViewModel(){
+        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+        incomeViewModel.getIncomeLiveData().observe(requireActivity(), new Observer<List<Income>>() {
+            @Override
+            public void onChanged(List<Income> incomes) {
+                incomeAdapter = new IncomeAdapter(getContext(), incomes);
+                binding.rvTransaction.setAdapter(incomeAdapter);
+            }
+        });
+    }
 
-        if(check == true){
+    private void changeData(boolean checked){
+        if(check != checked){
             incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
             incomeViewModel.getIncomeLiveData().observe(requireActivity(), new Observer<List<Income>>() {
                 @Override
                 public void onChanged(List<Income> incomes) {
                     incomeAdapter = new IncomeAdapter(getContext(), incomes);
+                    incomeAdapter.setDatalist(incomes);
                     binding.rvTransaction.setAdapter(incomeAdapter);
                 }
             });
+            check = true;
         }
         else{
             expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
@@ -92,11 +96,12 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onChanged(List<Expense> expenses) {
                     expenseAdapter = new ExpenseAdapter(getContext(), expenses);
+                    expenseAdapter.setDatalist(expenses);
                     binding.rvTransaction.setAdapter(expenseAdapter);
                 }
             });
+            check = false;
         }
-
     }
 
     @Override
