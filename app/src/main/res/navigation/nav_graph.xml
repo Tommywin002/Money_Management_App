@@ -37,7 +37,11 @@
         android:id="@+id/settingFragment"
         android:name="com.example.moneymanagement.ui.setting.SettingFragment"
         android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_languageFragemt"
+            app:destination="@id/languageFragemt" />
+    </fragment>
     <fragment
         android:id="@+id/addUserFragment"
         android:name="com.example.moneymanagement.ui.accounts.AddAccountFragment"
@@ -79,4 +83,15 @@
             app:popUpTo="@id/account_transactionFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/languageFragemt"
+        android:name="com.example.moneymanagement.ui.setting.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language">
+
+        <action
+            android:id="@+id/action_languageFragemt_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
+
 </navigation>
