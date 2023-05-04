@@ -25,8 +25,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.moneymanagement.adapter.ExpenseAdapter;
-import com.example.moneymanagement.adapter.IncomeAdapter;
 import com.example.moneymanagement.databinding.FragmentAccountsBinding;
 import com.example.moneymanagement.databinding.FragmentHistoryBinding;
 import com.example.moneymanagement.model.Account;
@@ -35,6 +33,8 @@ import com.example.moneymanagement.R;
 import com.example.moneymanagement.model.Income;
 import com.example.moneymanagement.ui.accounts.AccountAdapter;
 import com.example.moneymanagement.ui.accounts.AccountsViewModel;
+import com.example.moneymanagement.ui.home.expense.ExpenseAdapter;
+import com.example.moneymanagement.ui.home.income.IncomeAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
