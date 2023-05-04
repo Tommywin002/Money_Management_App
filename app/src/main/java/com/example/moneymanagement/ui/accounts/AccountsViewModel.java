@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.moneymanagement.model.Account;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,8 +24,9 @@ public class AccountsViewModel extends ViewModel {
 
     public LiveData<List<Account>> getAccountLiveData(){
         lstAccounts = new ArrayList<>();
+        String uid = FirebaseAuth.getInstance().getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Account").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("User").document(uid).collection("Account").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 lstAccounts.clear();
