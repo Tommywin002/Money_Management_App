@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -121,191 +121,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="Categories"
-                android:textColor="@color/blue1"
-                android:textSize="24dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TableLayout
-                        android:id="@+id/income"
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/income_bg">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:id="@+id/imageView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="60dp"
-                                android:padding="2dp"
-                                app:srcCompat="@drawable/coin" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/incomeEdt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Income"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                        </TableRow>
-
-                    </TableLayout>
-
-                    <TableLayout
-                        android:id="@+id/cate1"
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/expense_bg">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:id="@+id/imageView1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="60dp"
-                                android:padding="2dp"
-                                app:srcCompat="@drawable/fuel" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/cate1Edt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Fuel"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                        </TableRow>
-
-                    </TableLayout>
-
-                    <TableLayout
-                        android:id="@+id/cate2"
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/expense_bg">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:id="@+id/imageView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="60dp"
-                                android:padding="2dp"
-                                app:srcCompat="@drawable/water" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/cate2Edt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Water"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                        </TableRow>
-
-                    </TableLayout>
-
-                    <TableLayout
-                        android:id="@+id/cate3"
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/expense_bg">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:id="@+id/imageView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="60dp"
-                                android:padding="2dp"
-                                app:srcCompat="@drawable/bag" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/cate3Edt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Shopping"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                        </TableRow>
-
-                    </TableLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/white">
 
@@ -355,24 +170,18 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/addFBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/add"
-                android:backgroundTint="@color/blue2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="10dp"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:layout_marginRight="15dp"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addFBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add"
+        android:backgroundTint="@color/blue2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="75dp"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:layout_marginRight="15dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
