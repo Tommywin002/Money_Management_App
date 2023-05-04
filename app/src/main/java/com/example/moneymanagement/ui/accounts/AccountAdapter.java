@@ -24,6 +24,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
     private Context context;
     private List<Account> accountList;
     private Dialog dialog;
+    private boolean checkClickable;
 
     public interface Dialog{
         void onClick(int pos);
@@ -52,21 +53,6 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
     public void onBindViewHolder(@NonNull AccountViewHolder holder, int position) {
         holder.binding.txtAccName.setText(accountList.get(position).getName());
         holder.binding.txtAccMoney.setText(accountList.get(position).getMoney());
-        holder.binding.accItemLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String id = accountList.get(position).getId();
-                String account = holder.binding.txtAccName.getText().toString();
-                String money = holder.binding.txtAccMoney.getText().toString();
-                Toast.makeText(context, account + " - " + money, Toast.LENGTH_SHORT).show();
-                Bundle bundle = new Bundle();
-                bundle.putString("account", account);
-                bundle.putString("money", money);
-                bundle.putString("id", id);
-                NavController navController = Navigation.findNavController((Activity) context, R.id.fragment);
-                navController.navigate(R.id.transactionFragment, bundle);
-            }
-        });
     }
 
     @Override
@@ -81,6 +67,14 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         public AccountViewHolder(@NonNull AccountListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.accItemLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(dialog != null){
+                        dialog.onClick(getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.moneymanagement.ui.home.transaction;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -68,7 +69,25 @@ public class Account_transactionFragment extends Fragment {
             public void onChanged(List<Account> accounts) {
                 accountAdapter = new AccountAdapter(getContext(), accounts);
                 binding.recycleViewAcc.setAdapter(accountAdapter);
+                accountAdapter.setDialog(new AccountAdapter.Dialog() {
+                    @Override
+                    public void onClick(int pos) {
+                        String account = accounts.get(pos).getName();
+                        String money = accounts.get(pos).getMoney();
+                        String id = accounts.get(pos).getId();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("account", account);
+                        bundle.putString("money", money);
+                        bundle.putString("id", id);
+                        NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
+                        navController.navigate(R.id.transactionFragment, bundle);
+                    }
+                });
             }
         });
+    }
+
+    private void getData(){
+
     }
 }

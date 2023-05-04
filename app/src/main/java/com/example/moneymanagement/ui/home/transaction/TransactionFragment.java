@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.moneymanagement.R;
 import com.example.moneymanagement.databinding.FragmentTransactionBinding;
 import com.example.moneymanagement.ui.home.category.DataHolder;
@@ -87,6 +88,7 @@ public class TransactionFragment extends Fragment {
         type = DataHolder.getInstance().getType();
         binding.categoryName.setText(category);
         binding.textView10.setText(type);
+        Glide.with(getContext()).load(img).into(binding.imgcheck);
 
         Bundle bundle = getArguments();
         account = bundle.getString("account");

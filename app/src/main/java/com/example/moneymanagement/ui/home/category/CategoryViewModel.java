@@ -29,7 +29,7 @@ public class CategoryViewModel extends ViewModel {
                     String name = documentSnapshot.getString("name");
                     String imgId = documentSnapshot.getString("imgId");
                     String type = documentSnapshot.getString("type");
-                    Category category = new Category(name, Integer.parseInt(imgId), type);
+                    Category category = new Category(name, imgId, type);
                     category.setId(documentSnapshot.getId());
                     lstCategory.add(category);
                 }

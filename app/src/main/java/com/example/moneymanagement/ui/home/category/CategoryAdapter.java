@@ -18,6 +18,8 @@ import com.example.moneymanagement.R;
 import com.example.moneymanagement.databinding.CategoryItemBinding;
 import com.example.moneymanagement.model.Category;
 import com.example.moneymanagement.ui.accounts.AccountAdapter;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private Context context;
     private List<Category> categories;
     private AccountAdapter.Dialog dialog;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
 
     public interface Dialog{
         void onClick(int pos);
@@ -45,22 +48,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.CategoryViewHolder holder, int position) {
+        Category category1 = categories.get(position);
         holder.binding.categoryName.setText(categories.get(position).getName());
-        //holder.binding.cateImg.setImageResource(categories.get(position).getImgId());
-        //Glide.with(context).load(categories.get(position).getImgId()).into(holder.binding.cateImg);
+        StorageReference storageReference = storage.getReference().child("image/" + category1.getImgId());
+        Glide.with(context).load(storageReference).into(holder.binding.cateImg);
         holder.binding.cateLayout.setOnClickListener(view->{
             String category = holder.binding.categoryName.getText().toString();
-            String img = holder.binding.cateImg.toString();
-            String type = categories.get(position).getType();
-            Toast.makeText(context, category + " - " + type, Toast.LENGTH_SHORT).show();
-            /*Bundle bundle = new Bundle();
-            bundle.putString("cateName", category);
-            bundle.putString("cateImg", img);*/
+            String img = String.valueOf(storageReference);
+            String type = category1.getType();
+            Toast.makeText(context, String.valueOf(storageReference), Toast.LENGTH_SHORT).show();
+
             DataHolder.getInstance().setCategoryName(category);
             DataHolder.getInstance().setImgId(img);
             DataHolder.getInstance().setType(type);
             NavController navController = Navigation.findNavController((Activity) context, R.id.fragment);
-            //navController.navigate(R.id.transactionFragment, bundle);
             navController.popBackStack();
         });
     }
