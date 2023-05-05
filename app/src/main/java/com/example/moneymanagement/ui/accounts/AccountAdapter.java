@@ -1,17 +1,13 @@
 package com.example.moneymanagement.ui.accounts;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneymanagement.R;
@@ -21,10 +17,9 @@ import com.example.moneymanagement.model.Account;
 import java.util.List;
 
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountViewHolder>{
-    private Context context;
+    private final Context context;
     private List<Account> accountList;
     private Dialog dialog;
-    private boolean checkClickable;
 
     public interface Dialog{
         void onClick(int pos);
@@ -40,6 +35,11 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
     public AccountAdapter(Context context, List<Account> accountList) {
         this.context = context;
         this.accountList = accountList;
+    }
+
+    public void setDataList(List<Account> lst){
+        this.accountList = lst;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -62,19 +62,47 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
 
     public class AccountViewHolder extends RecyclerView.ViewHolder {
 
-        private AccountListItemBinding binding;
+        private final AccountListItemBinding binding;
 
         public AccountViewHolder(@NonNull AccountListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.accItemLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(dialog != null){
-                        dialog.onClick(getLayoutPosition());
-                    }
+            binding.accItemLayout.setOnClickListener(view->{
+                if(dialog != null){
+                    dialog.onClick(getLayoutPosition());
                 }
             });
+            binding.accMenuImg.setOnClickListener(view->{
+                if(dialog != null){
+                    dialog.onClick(getLayoutPosition());
+                    //showPopupMenu(view);
+                }
+            });
+
         }
+    }
+
+    private void showPopupMenu(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+        popupMenu.inflate(R.menu.account_menu);
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.editMnu:
+                        return true;
+
+                    case R.id.deleteMnu:
+                        return true;
+
+                    default:
+                        return false;
+                }
+
+            }
+        });
+
+        popupMenu.show();
     }
 }

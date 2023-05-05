@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.moneymanagement.R;
@@ -65,7 +66,12 @@ public class TransactionFragment extends Fragment {
         });
 
         binding.conductImg.setOnClickListener(view->{
-            conductTransaction();
+            if(binding.edtMoneyInput.getText().length() == 0){
+                Toast.makeText(getContext(), "Please type transaction money!", Toast.LENGTH_LONG).show();
+            }
+            else{
+                conductTransaction();
+            }
         });
 
     }
@@ -109,33 +115,17 @@ public class TransactionFragment extends Fragment {
         String currentDate = String.format("%02d/%02d/%d", day, month, year);
         textView.setText(currentDate);
 
-        /*textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Lấy ngày hiện tại của hệ thống
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                // Lấy ngày được chọn và hiển thị nó trên TextView
-                                String selectedDate = String.format("%02d/%02d/%d", dayOfMonth, month + 1, year);
-                                textView.setText(selectedDate);
-                            }
-                        }, year, month, dayOfMonth);
-                datePickerDialog.show();
-                System.out.println(textView.getText().toString());
-            }
-        });*/
     }
 
     private void conductTransaction(){
         int tMoney = Integer.parseInt(binding.edtMoneyInput.getText().toString());
         int newMoney = type.contains("Income") ? Integer.parseInt(money) + tMoney : Integer.parseInt(money) - tMoney;
-        String date = String.valueOf(binding.dateTxt.getText());
-        transactionViewModel.addTransaction(account, category, date, img, String.valueOf(tMoney), type, id, String.valueOf(newMoney));
+        if(newMoney < 0){
+            Toast.makeText(getContext(), "The account balance don't have enough money!", Toast.LENGTH_LONG).show();
+        }
+        else{
+            String date = String.valueOf(binding.dateTxt.getText());
+            transactionViewModel.addTransaction(account, category, date, img, String.valueOf(tMoney), type, id, String.valueOf(newMoney));
+        }
     }
 }

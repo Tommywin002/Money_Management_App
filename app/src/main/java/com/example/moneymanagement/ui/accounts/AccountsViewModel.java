@@ -1,32 +1,40 @@
 package com.example.moneymanagement.ui.accounts;
 
-import android.widget.ArrayAdapter;
+import android.app.Activity;
+import android.util.Log;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import com.example.moneymanagement.R;
 import com.example.moneymanagement.model.Account;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AccountsViewModel extends ViewModel {
 
-    private MutableLiveData<List<Account>> listAccountsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Account>> listAccountsLiveData = new MutableLiveData<>();
     private List<Account> lstAccounts = new ArrayList<>();
-    private ArrayAdapter<String> accNames;
-    private String[] acc = null;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public LiveData<List<Account>> getAccountLiveData(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public LiveData<List<Account>> getAccountLiveData() {
+
         db.collection("Account").get().addOnCompleteListener(task -> {
             lstAccounts.clear();
             if(task.isSuccessful()){
@@ -36,21 +44,52 @@ public class AccountsViewModel extends ViewModel {
                     lstAccounts.add(account);
                 }
                 listAccountsLiveData.postValue(lstAccounts);
-
-                /*for(int i = 0; i < lstAccounts.size(); i++){
-                    acc[i] = lstAccounts.get(i).getName();
-                }
-                System.out.println(acc[0] + " " + acc[1]);
-                accNames = new ArrayAdapter<String>(accNames.getContext(), android.R.layout.simple_spinner_item, acc);*/
             }
             else {
-
+                Log.d("Error", "Load data (Account) fail");
             }
         });
         return listAccountsLiveData;
     }
 
-    public ArrayAdapter<String> getAccNames(){
-        return accNames;
+    public void addData(Map newAccount) {
+        db.collection("Account").add(newAccount).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@org.checkerframework.checker.nullness.qual.NonNull Task<DocumentReference> task) {
+                NavController navController = Navigation.findNavController((Activity) AddAccountFragment.context, R.id.fragment);
+                navController.popBackStack();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
     }
+
+    public void editData(String account, String money, String id) {
+        Map<String, String> newData = new HashMap<>();
+        newData.put("Name", account);
+        newData.put("Money", money);
+        db.collection("Account").document(id).set(newData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                NavController navController = Navigation.findNavController((Activity) DetailAccountFragment.context, R.id.fragment);
+                navController.popBackStack();
+            }
+        });
+    }
+
+    public void deleteData(String account, String money, String id) {
+        Map<String, String> newData = new HashMap<>();
+        newData.put("Name", account);
+        newData.put("Money", money);
+        db.collection("Account").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                return;
+            }
+        });
+    }
+
 }
