@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -33,7 +34,8 @@ public class TransactionViewModel extends ViewModel {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private void loadData(){
-        db.collection("Account").get().addOnCompleteListener(task -> {
+        String uid = FirebaseAuth.getInstance().getUid();
+        db.collection("User").document(uid).collection("Account").get().addOnCompleteListener(task -> {
            if(task.isSuccessful()){
                List<String> dataList = new ArrayList<>();
                for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
@@ -60,7 +62,8 @@ public class TransactionViewModel extends ViewModel {
         item.put("date", date);
         item.put("imgId", imgId);
         item.put("money", money);
-        db.collection(type).add(item).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        db.collection("User").document(uid).collection(type).add(item).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
                 updateAccount(account, newMoney, id);
@@ -78,7 +81,8 @@ public class TransactionViewModel extends ViewModel {
         Map<String, String> newData = new HashMap<>();
         newData.put("Name", name);
         newData.put("Money", money);
-        db.collection("Account").document(id).set(newData).addOnSuccessListener(new OnSuccessListener<Void>() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        db.collection("User").document(uid).collection("Account").document(id).set(newData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 NavController navController = Navigation.findNavController((Activity) TransactionFragment.context, R.id.fragment);

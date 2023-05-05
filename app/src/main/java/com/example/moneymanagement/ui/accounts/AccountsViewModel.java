@@ -16,9 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -34,7 +31,7 @@ public class AccountsViewModel extends ViewModel {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public LiveData<List<Account>> getAccountLiveData() {
-
+    
         db.collection("Account").get().addOnCompleteListener(task -> {
             lstAccounts.clear();
             if(task.isSuccessful()){
