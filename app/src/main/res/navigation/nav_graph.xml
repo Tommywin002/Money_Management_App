@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_account_transactionFragment"
             app:destination="@id/account_transactionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountsFragment"
@@ -55,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/account_transactionFragment"
-        android:name="com.example.moneymanagement.ui.home.Account_transactionFragment"
+        android:name="com.example.moneymanagement.ui.home.transaction.Account_transactionFragment"
         android:label="fragment_account_transaction"
         tools:layout="@layout/fragment_account_transaction" >
         <action
@@ -69,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.example.moneymanagement.ui.home.TransactionFragment"
+        android:name="com.example.moneymanagement.ui.home.transaction.TransactionFragment"
         android:label="fragment_transaction"
         tools:layout="@layout/fragment_transaction" >
         <action
@@ -84,6 +87,7 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
+
         android:id="@+id/languageFragemt"
         android:name="com.example.moneymanagement.ui.setting.LanguageFragment"
         android:label="fragment_language"
@@ -93,5 +97,11 @@
             android:id="@+id/action_languageFragemt_to_settingFragment"
             app:destination="@id/settingFragment" />
     </fragment>
+
+
+        android:id="@+id/categoryFragment"
+        android:name="com.example.moneymanagement.ui.home.category.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" />
 
 </navigation>

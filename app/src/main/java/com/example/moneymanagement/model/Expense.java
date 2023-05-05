@@ -1,6 +1,6 @@
 package com.example.moneymanagement.model;
 
-public class Transaction {
+public class Expense {
 
     private String id;
     private String account;
@@ -9,8 +9,12 @@ public class Transaction {
     private String date;
     private String imgId;
 
-    public Transaction() {
-
+    public Expense(String account, String category, String money, String date, String imgId) {
+        this.account = account;
+        this.category = category;
+        this.money = money;
+        this.date = date;
+        this.imgId = imgId;
     }
 
     public String getId() {
