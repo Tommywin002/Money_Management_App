@@ -71,7 +71,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/totalTxt"
+                    android:id="@+id/totalMoney"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.0"
@@ -90,7 +90,7 @@
                     android:textColor="@color/black"
                     android:textSize="24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/totalTxt"
+                    app:layout_constraintStart_toEndOf="@+id/totalMoney"
                     app:layout_constraintTop_toTopOf="parent" />
 
 

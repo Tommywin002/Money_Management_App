@@ -75,7 +75,6 @@ public class TransactionViewModel extends ViewModel {
             }
         });
 
-
     }
 
     private void updateAccount(String name, String money, String id){

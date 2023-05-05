@@ -42,18 +42,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the  factory method to
- * create an instance of this fragment.
- */
 public class HistoryFragment extends Fragment {
 
-    FragmentHistoryBinding binding;
-    ExpenseAdapter expenseAdapter;
-    IncomeAdapter incomeAdapter;
-    ExpenseViewModel expenseViewModel;
-    IncomeViewModel incomeViewModel;
+    private FragmentHistoryBinding binding;
+    private ExpenseAdapter expenseAdapter;
+    private IncomeAdapter incomeAdapter;
+    private ExpenseViewModel expenseViewModel;
+    private IncomeViewModel incomeViewModel;
     private int lastSelected = 0;
     private boolean incomeSelected = true;
     private String searchKey = "";
