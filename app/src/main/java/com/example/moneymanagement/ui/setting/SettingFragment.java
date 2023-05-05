@@ -36,7 +36,7 @@ public class SettingFragment extends Fragment { FragmentSettingBinding binding;
             @Override
             public void onClick(View view) {
                 NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
-                navController.navigate(R.id.languageFragemt);
+                //navController.navigate(R.id.languageFragemt);
             }
         });
         signOut();
