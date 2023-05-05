@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -43,6 +45,17 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         login();
+        register();
+    }
+    public void register(){
+        binding.registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(getActivity(), R.id.logFragment);
+                navController.navigate(R.id.register);
+                //navController.popBackStack();
+            }
+        });
     }
     public void login(){
 
@@ -54,9 +67,11 @@ public class LoginFragment extends Fragment {
                 email = binding.edtEmail.getText().toString();
                 password = binding.edtPassword.getText().toString();
                 if(TextUtils.isEmpty(email)){
+                    Toast.makeText(getContext(), "enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
+                    Toast.makeText(getContext(), "enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 fireAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
