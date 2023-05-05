@@ -35,7 +35,11 @@
         android:id="@+id/userFragment"
         android:name="com.example.moneymanagement.ui.user.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_edit_User2"
+            app:destination="@id/edit_User2" />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.example.moneymanagement.ui.setting.SettingFragment"
@@ -87,4 +91,13 @@
         android:name="com.example.moneymanagement.ui.home.category.CategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/edit_User2"
+        android:name="com.example.moneymanagement.ui.user.Edit_User"
+        android:label="fragment_edit__user"
+        tools:layout="@layout/fragment_edit__user" >
+        <action
+            android:id="@+id/action_edit_User2_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
 </navigation>
