@@ -35,8 +35,7 @@ public class SettingFragment extends Fragment { FragmentSettingBinding binding;
         binding.languageCL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
-                //navController.navigate(R.id.languageFragemt);
+
             }
         });
         signOut();
