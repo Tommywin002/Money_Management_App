@@ -69,7 +69,7 @@ public class AddAccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
-                navController.navigate(R.id.accountsFragment);
+                navController.navigate(R.id.userFragment);
             }
         });
 

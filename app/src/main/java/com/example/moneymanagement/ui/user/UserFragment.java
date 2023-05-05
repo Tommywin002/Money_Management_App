@@ -5,11 +5,14 @@ import static android.content.ContentValues.TAG;
 import static androidx.databinding.DataBindingUtil.findBinding;
 import static androidx.databinding.DataBindingUtil.setContentView;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +40,7 @@ import com.google.firebase.firestore.auth.User;
 
 public class UserFragment extends Fragment {
     private String name, Gender, Birth, Phone;
+    private Button btnEdit;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FragmentUserBinding binding;
 
@@ -46,7 +50,18 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentUserBinding.inflate(inflater,container, false);
         View view = binding.getRoot();
+        btnEdit = view.findViewById(R.id.btnEdit);
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController((Activity) getContext(),R.id.fragment);
+                navController.navigate(R.id.edit_User2);
+
+            }
+        });
         return view;
+
     }
 
     @Override
@@ -73,6 +88,7 @@ public class UserFragment extends Fragment {
                                             binding.txtBirth.setText(Birth);
                                             binding.txtGender.setText(Gender);
                                             binding.txtPhone.setText(Phone);
+                                            binding.namePresent.setText(name);
                                         }
                                     }
                                 });
