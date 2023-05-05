@@ -54,7 +54,8 @@ public class AccountsViewModel extends ViewModel {
     }
 
     public void addData(Map newAccount) {
-        db.collection("Account").add(newAccount).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        db.collection("User").document(uid).collection("Account").add(newAccount).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@org.checkerframework.checker.nullness.qual.NonNull Task<DocumentReference> task) {
                 NavController navController = Navigation.findNavController((Activity) AddAccountFragment.context, R.id.fragment);
