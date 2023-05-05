@@ -1,5 +1,7 @@
 package com.example.moneymanagement.ui.history;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -77,9 +79,42 @@ public class HistoryFragment extends Fragment {
                     incomes = searchIncome(searchKey, incomes);
                 }
                 incomeAdapter = new IncomeAdapter(getContext(), sortIncome(incomes,position) );
+                List<Income> finalIncomes = incomes;
+                incomeAdapter.setDialog(new IncomeAdapter.Dialog() {
+                    @Override
+                    public void onClick(int pos) {
+                        final CharSequence[] dialogItem = {"Detail","Delete"};
+                        String account = finalIncomes.get(pos).getAccount();
+                        String money = finalIncomes.get(pos).getMoney();
+                        String id = finalIncomes.get(pos).getId();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("account", account);
+                        bundle.putString("money", money);
+                        bundle.putString("id", id);
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                        dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                switch (i){
+                                    case 0:
+                                        transactionDetail(bundle);
+                                        break;
+                                    case 1:
+                                        incomeViewModel.deleteIncome(finalIncomes.get(pos).getId());
+                                        break;
+                                }
+                            }
+                        });
+                        dialog.show();
+                    }
+                });
                 binding.rvTransactionHistory.setAdapter(incomeAdapter);
             }
         });
+    }
+    private void transactionDetail(Bundle bundle) {
+        NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+        navController.navigate(R.id.transactionFragment, bundle);
     }
 
     private void initExpenseViewModel(String searchKey,int position) {
@@ -91,6 +126,35 @@ public class HistoryFragment extends Fragment {
                     expenses = searchExpense(searchKey,expenses);
                 }
                 expenseAdapter = new ExpenseAdapter(getContext(), sortExpense(expenses,position));
+                List<Expense> finalExpenses = expenses;
+                expenseAdapter.setDialog(new ExpenseAdapter.Dialog() {
+                    @Override
+                    public void onClick(int pos) {
+                        final CharSequence[] dialogItem = {"Detail","Delete"};
+                        String account = finalExpenses.get(pos).getAccount();
+                        String money = finalExpenses.get(pos).getMoney();
+                        String id = finalExpenses.get(pos).getId();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("account", account);
+                        bundle.putString("money", money);
+                        bundle.putString("id", id);
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                        dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                switch (i){
+                                    case 0:
+                                        transactionDetail(bundle);
+                                        break;
+                                    case 1:
+                                        expenseViewModel.deleteExpense(finalExpenses.get(pos).getId());
+                                        break;
+                                }
+                            }
+                        });
+                        dialog.show();
+                    }
+                });
                 binding.rvTransactionHistory.setAdapter(expenseAdapter);
             }
         });
@@ -216,6 +280,7 @@ public class HistoryFragment extends Fragment {
         }
         return search;
     }
+
 
 }
 
