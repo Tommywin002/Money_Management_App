@@ -21,10 +21,14 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
 
     private Context context;
     private List<Income> incomeList;
-    private AccountAdapter.Dialog dialog;
+    private Dialog dialog;
 
     public interface Dialog{
         void onClick(int pos);
+    }
+
+    public void setDialog(Dialog dialog) {
+        this.dialog = dialog;
     }
 
     public IncomeAdapter(Context context, List<Income> incomeList) {
@@ -55,9 +59,12 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
         holder.binding.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String account = holder.binding.txtAccount.getText().toString();
-                String category = holder.binding.txtCategory.getText().toString();
-                Toast.makeText(context, account + " - " + category, Toast.LENGTH_SHORT).show();
+//                String account = holder.binding.txtAccount.getText().toString();
+//                String category = holder.binding.txtCategory.getText().toString();
+//                Toast.makeText(context, account + " - " + category, Toast.LENGTH_SHORT).show();
+                if (dialog!=null){
+                    dialog.onClick(holder.getLayoutPosition());
+                }
             }
         });
     }
