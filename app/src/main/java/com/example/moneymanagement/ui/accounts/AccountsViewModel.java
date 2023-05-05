@@ -34,23 +34,14 @@ public class AccountsViewModel extends ViewModel {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 lstAccounts.clear();
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         Account account = new Account(documentSnapshot.getString("Name"), documentSnapshot.getString("Money"));
                         account.setId(documentSnapshot.getId());
                         lstAccounts.add(account);
                     }
                     listAccountsLiveData.postValue(lstAccounts);
-
-
-                /*for(int i = 0; i < lstAccounts.size(); i++){
-                    acc[i] = lstAccounts.get(i).getName();
                 }
-                System.out.println(acc[0] + " " + acc[1]);
-                accNames = new ArrayAdapter<String>(accNames.getContext(), android.R.layout.simple_spinner_item, acc);*/
-            }
-            else {
-
             }
         });
         return listAccountsLiveData;

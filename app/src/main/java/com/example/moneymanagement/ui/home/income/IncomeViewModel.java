@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.moneymanagement.model.Income;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -25,7 +26,8 @@ public class IncomeViewModel extends ViewModel {
     public LiveData<List<Income>> getIncomeLiveData(){
         lstIncome = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Income").get().addOnCompleteListener(task ->  {
+        String uid = FirebaseAuth.getInstance().getUid();
+        db.collection("User").document(uid).collection("Income").get().addOnCompleteListener(task ->  {
             lstIncome.clear();
             if(task.isSuccessful()){
                 for(QueryDocumentSnapshot documentSnapshot : task.getResult()){

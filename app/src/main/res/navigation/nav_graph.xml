@@ -98,7 +98,7 @@
             app:destination="@id/settingFragment" />
     </fragment>
 
-
+    <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.moneymanagement.ui.home.category.CategoryFragment"
         android:label="fragment_category"
