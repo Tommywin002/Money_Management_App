@@ -16,13 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.databinding.FragmentAccountsBinding;
 import com.example.moneymanagement.databinding.FragmentSettingBinding;
 import com.example.moneymanagement.ui.Login;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SettingFragment extends Fragment {
-    FragmentSettingBinding binding;
+public class SettingFragment extends Fragment { FragmentSettingBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
