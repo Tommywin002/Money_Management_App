@@ -18,6 +18,7 @@ import com.example.moneymanagement.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -47,10 +48,11 @@ public class AddAccountFragment extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String uid = FirebaseAuth.getInstance().getUid();
                 Map<String, String> item = new HashMap<>();
                 item.put("Name", accName.getText().toString().trim());
                 item.put("Money", accMoney.getText().toString().trim());
-                db.collection("Account").add(item).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                db.collection("User").document(uid).collection("Account").add(item).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         System.out.println("yep");

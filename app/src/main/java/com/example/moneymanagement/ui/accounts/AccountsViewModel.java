@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.moneymanagement.model.Account;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -26,16 +27,21 @@ public class AccountsViewModel extends ViewModel {
     private String[] acc = null;
 
     public LiveData<List<Account>> getAccountLiveData(){
+        lstAccounts = new ArrayList<>();
+        String uid = FirebaseAuth.getInstance().getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Account").get().addOnCompleteListener(task -> {
-            lstAccounts.clear();
-            if(task.isSuccessful()){
-                for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                    Account account = new Account(documentSnapshot.getString("Name"), documentSnapshot.getString("Money"));
-                    account.setId(documentSnapshot.getId());
-                    lstAccounts.add(account);
-                }
-                listAccountsLiveData.postValue(lstAccounts);
+        db.collection("User").document(uid).collection("Account").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                lstAccounts.clear();
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                        Account account = new Account(documentSnapshot.getString("Name"), documentSnapshot.getString("Money"));
+                        account.setId(documentSnapshot.getId());
+                        lstAccounts.add(account);
+                    }
+                    listAccountsLiveData.postValue(lstAccounts);
+
 
                 /*for(int i = 0; i < lstAccounts.size(); i++){
                     acc[i] = lstAccounts.get(i).getName();
