@@ -20,10 +20,14 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
 
     private Context context;
     private List<Expense> expenseList;
-    private AccountAdapter.Dialog dialog;
+    private Dialog dialog;
 
     public interface Dialog{
         void onClick(int pos);
+    }
+
+    public void setDialog(Dialog dialog) {
+        this.dialog = dialog;
     }
 
     public ExpenseAdapter(Context context, List<Expense> expenseList) {
@@ -54,9 +58,12 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         holder.binding.expenseLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String account = holder.binding.txtAccount.getText().toString();
-                String category = holder.binding.txtCategory.getText().toString();
-                Toast.makeText(context, account + " - " + category, Toast.LENGTH_SHORT).show();
+//                String account = holder.binding.txtAccount.getText().toString();
+//                String category = holder.binding.txtCategory.getText().toString();
+//                Toast.makeText(context, account + " - " + category, Toast.LENGTH_SHORT).show();
+                if (dialog!=null){
+                    dialog.onClick(holder.getLayoutPosition());
+                }
             }
         });
     }

@@ -1,10 +1,16 @@
 package com.example.moneymanagement.ui.history;
 
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.moneymanagement.model.Income;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -16,8 +22,7 @@ public class IncomeViewModel extends ViewModel {
 
     private final MutableLiveData<List<Income>> lstIncomeLiveData = new MutableLiveData<>();
     private List<Income> lstIncome;
-
-    public LiveData<List<Income>> getIncomeLiveData(){
+    public void getIncome(){
         lstIncome = new ArrayList<>();
         String uid = FirebaseAuth.getInstance().getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -41,7 +46,28 @@ public class IncomeViewModel extends ViewModel {
 
             }
         });
+    }
+    public LiveData<List<Income>> getIncomeLiveData(){
+        getIncome();
         return lstIncomeLiveData;
+    }
+
+    public void deleteIncome(String id){
+        String uid = FirebaseAuth.getInstance().getUid();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("User").document(uid).collection("Income").document(id).delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+
+                        }
+                        else{
+                            Log.d("VHDuc", "Error ", task.getException());
+                        }
+                        getIncome();
+                    }
+                });
     }
 
 
