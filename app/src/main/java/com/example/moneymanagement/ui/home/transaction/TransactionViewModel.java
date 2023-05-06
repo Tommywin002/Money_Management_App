@@ -1,17 +1,14 @@
 package com.example.moneymanagement.ui.home.transaction;
 
 import android.app.Activity;
-import android.nfc.Tag;
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.model.Account;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,8 +27,8 @@ import java.util.Map;
 
 public class TransactionViewModel extends ViewModel {
 
-    private MutableLiveData<List<String>> accName = new MutableLiveData<>();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final MutableLiveData<List<String>> accName = new MutableLiveData<>();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private void loadData(){
         String uid = FirebaseAuth.getInstance().getUid();

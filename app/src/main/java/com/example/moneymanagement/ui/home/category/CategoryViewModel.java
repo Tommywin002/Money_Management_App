@@ -19,7 +19,7 @@ public class CategoryViewModel extends ViewModel {
     private MutableLiveData<List<Category>> lstCategoryLiveData = new MutableLiveData<>();
     private List<Category> lstCategory;
 
-    public LiveData<List<Category>> getCategoryLiveData(){
+    public LiveData<List<Category>> getCategoryLiveData() {
         lstCategory = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Category").get().addOnCompleteListener(task ->  {

@@ -2,12 +2,8 @@ package com.example.moneymanagement.ui.home.category;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -19,11 +15,6 @@ import com.example.moneymanagement.R;
 import com.example.moneymanagement.databinding.CategoryItemBinding;
 import com.example.moneymanagement.model.Category;
 import com.example.moneymanagement.ui.accounts.AccountAdapter;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -32,7 +23,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private Context context;
     private List<Category> categories;
     private AccountAdapter.Dialog dialog;
-
 
     public interface Dialog{
         void onClick(int pos);
@@ -56,7 +46,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         holder.binding.categoryName.setText(category.getName());
         Glide.with(context).load(category.getImgId()).into(holder.binding.cateImg);
-        //Picasso.get().load(imageUrl).into(holder.binding.cateImg);
 
         holder.binding.cateLayout.setOnClickListener(view->{
             String categoryName = holder.binding.categoryName.getText().toString();

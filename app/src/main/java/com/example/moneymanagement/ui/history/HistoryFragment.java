@@ -9,8 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,20 +19,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import com.example.moneymanagement.databinding.FragmentAccountsBinding;
 import com.example.moneymanagement.databinding.FragmentHistoryBinding;
-import com.example.moneymanagement.model.Account;
 import com.example.moneymanagement.model.Expense;
-import com.example.moneymanagement.R;
 import com.example.moneymanagement.model.Income;
-import com.example.moneymanagement.ui.accounts.AccountAdapter;
-import com.example.moneymanagement.ui.accounts.AccountsViewModel;
 import com.example.moneymanagement.ui.home.expense.ExpenseAdapter;
 import com.example.moneymanagement.ui.home.income.IncomeAdapter;
 
@@ -97,6 +85,9 @@ public class HistoryFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int i) {
                                 switch (i){
                                     case 0:
+
+                                        break;
+                                    case 1:
                                         incomeViewModel.deleteIncome(finalIncomes.get(pos).getId());
                                         break;
                                 }
@@ -138,6 +129,8 @@ public class HistoryFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int i) {
                                 switch (i){
                                     case 0:
+                                        break;
+                                    case 1:
                                         expenseViewModel.deleteExpense(finalExpenses.get(pos).getId());
                                         break;
                                 }
@@ -150,7 +143,7 @@ public class HistoryFragment extends Fragment {
             }
         });
     }
-    private void initUI(){
+    private void initUI() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         binding.rvTransactionHistory.setLayoutManager(layoutManager);
@@ -202,7 +195,7 @@ public class HistoryFragment extends Fragment {
             }
         });
     }
-    public List<Income> sortIncome(List<Income> lstIncome, int position){
+    public List<Income> sortIncome(List<Income> lstIncome, int position) {
         if (position==1){
             Collections.sort(lstIncome, new Comparator<Income>() {
                 @Override
@@ -221,7 +214,8 @@ public class HistoryFragment extends Fragment {
         }
         return lstIncome;
     }
-    public List<Expense> sortExpense(List<Expense> lstExpense, int position){
+
+    public List<Expense> sortExpense(List<Expense> lstExpense, int position) {
         if (position==1){
             Collections.sort(lstExpense, new Comparator<Expense>() {
                 @Override
@@ -240,7 +234,8 @@ public class HistoryFragment extends Fragment {
         }
         return lstExpense;
     }
-    public List<Income> searchIncome(String text, List<Income> lstIncome){
+
+    public List<Income> searchIncome(String text, List<Income> lstIncome) {
         ArrayList<Income> search = new ArrayList<>();
         for(Income ts : lstIncome){
             if(ts.getCategory().toLowerCase().contains(text.toLowerCase())){
@@ -256,7 +251,7 @@ public class HistoryFragment extends Fragment {
        return search;
     }
 
-    public List<Expense> searchExpense(String text, List<Expense> lstExpense){
+    public List<Expense> searchExpense(String text, List<Expense> lstExpense) {
         ArrayList<Expense> search = new ArrayList<>();
         for(Expense ts : lstExpense){
             if(ts.getCategory().toLowerCase().contains(text.toLowerCase())){
@@ -272,7 +267,4 @@ public class HistoryFragment extends Fragment {
         return search;
     }
 
-
 }
-
-

@@ -19,7 +19,7 @@ import com.example.moneymanagement.databinding.FragmentDetailAccountBinding;
 public class DetailAccountFragment extends Fragment {
 
     private FragmentDetailAccountBinding binding;
-    private AccountsViewModel accountsViewModel = new AccountsViewModel();
+    private final AccountsViewModel accountsViewModel = new AccountsViewModel();
     private static String id;
     public static Context context;
 

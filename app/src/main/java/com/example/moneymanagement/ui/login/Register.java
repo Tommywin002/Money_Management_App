@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.databinding.FragmentLoginBinding;
 import com.example.moneymanagement.databinding.FragmentRegisterBinding;
 import com.example.moneymanagement.ui.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,7 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Register extends Fragment {
     FragmentRegisterBinding binding;
     private FirebaseAuth fireAuth = FirebaseAuth.getInstance();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,17 +42,19 @@ public class Register extends Fragment {
         backTologin();
         registerAcc();
     }
-    public void backTologin(){
+
+    public void backTologin() {
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.logFragment);
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.logFragment);
                 navController.popBackStack();
 
             }
         });
     }
-    public void registerAcc(){
+
+    public void registerAcc() {
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

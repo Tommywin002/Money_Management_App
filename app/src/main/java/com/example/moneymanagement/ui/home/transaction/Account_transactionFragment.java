@@ -1,7 +1,5 @@
 package com.example.moneymanagement.ui.home.transaction;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,11 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.moneymanagement.R;
 import com.example.moneymanagement.databinding.FragmentAccountTransactionBinding;
-import com.example.moneymanagement.databinding.FragmentAccountsBinding;
 import com.example.moneymanagement.model.Account;
 import com.example.moneymanagement.ui.accounts.AccountAdapter;
 import com.example.moneymanagement.ui.accounts.AccountsViewModel;
@@ -51,20 +47,20 @@ public class Account_transactionFragment extends Fragment {
     }
 
     private void initUI(){
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
         binding.recycleViewAcc.setLayoutManager(layoutManager);
         binding.recycleViewAcc.addItemDecoration(itemDecoration);
 
         binding.backImg.setOnClickListener(view->{
-            NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
             navController.popBackStack();
         });
     }
 
     private void initViewModel(){
         accountsViewModel = new ViewModelProvider(this).get(AccountsViewModel.class);
-        accountsViewModel.getAccountLiveData().observe(requireActivity(), new Observer<List<Account>>() {
+        accountsViewModel.getData().observe(requireActivity(), new Observer<List<Account>>() {
             @Override
             public void onChanged(List<Account> accounts) {
                 accountAdapter = new AccountAdapter(getContext(), accounts);
@@ -87,7 +83,4 @@ public class Account_transactionFragment extends Fragment {
         });
     }
 
-    private void getData(){
-
-    }
 }

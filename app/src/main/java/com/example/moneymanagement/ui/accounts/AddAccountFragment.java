@@ -38,7 +38,6 @@ public class AddAccountFragment extends Fragment {
     }
 
     private void initUI() {
-
         accountsViewModel = new AccountsViewModel();
         binding.confirmImg.setOnClickListener(view->{
             Map<String, String> newAccount = new HashMap<>();
@@ -46,7 +45,6 @@ public class AddAccountFragment extends Fragment {
             newAccount.put("Money", binding.accNumberEdt.getText().toString().trim());
             accountsViewModel.addData(newAccount);
         });
-
     }
 
 }
