@@ -1,13 +1,11 @@
 package com.example.moneymanagement.ui.home.transaction;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -15,8 +13,6 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +22,12 @@ import com.example.moneymanagement.databinding.FragmentTransactionBinding;
 import com.example.moneymanagement.ui.home.category.DataHolder;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class TransactionFragment extends Fragment {
 
     private FragmentTransactionBinding binding;
     private TransactionViewModel transactionViewModel;
-    public String account, category, money, img, date, type, id;
+    public String account, category, money, img, type, id;
     public static Context context;
 
     @Override
@@ -56,12 +51,12 @@ public class TransactionFragment extends Fragment {
         initData();
 
         binding.backImg.setOnClickListener(view-> {
-            NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
             navController.popBackStack();
         });
 
         binding.categoryName.setOnClickListener(view->{
-            NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
             navController.navigate(R.id.categoryFragment);
         });
 
@@ -78,14 +73,6 @@ public class TransactionFragment extends Fragment {
 
     private void initViewModel(){
         transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
-        /*transactionViewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
-            @Override
-            public void onChanged(List<String> strings) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, strings);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                binding.spinnerAccount.setAdapter(adapter);
-            }
-        });*/
     }
 
     private void initData(){
@@ -95,7 +82,7 @@ public class TransactionFragment extends Fragment {
         type = DataHolder.getInstance().getType();
         binding.categoryName.setText(category);
         binding.textView10.setText(type);
-        Glide.with(getContext()).load(img).into(binding.imgcheck);
+        Glide.with(requireActivity()).load(img).into(binding.imgcheck);
 
         Bundle bundle = getArguments();
         account = bundle.getString("account");

@@ -2,9 +2,7 @@ package com.example.moneymanagement.ui.home.expense;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.moneymanagement.databinding.ExpenseItemBinding;
 import com.example.moneymanagement.model.Expense;
-import com.example.moneymanagement.ui.accounts.AccountAdapter;
 
 import java.util.List;
 
@@ -55,17 +52,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         holder.binding.txtAccount.setText(expenseList.get(position).getAccount());
         holder.binding.txtDate.setText(expenseList.get(position).getDate());
         Glide.with(context).load(expenseList.get(position).getImgId()).into(holder.binding.imgExpense);
-        holder.binding.expenseLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                String account = holder.binding.txtAccount.getText().toString();
-//                String category = holder.binding.txtCategory.getText().toString();
-//                Toast.makeText(context, account + " - " + category, Toast.LENGTH_SHORT).show();
-                if (dialog!=null){
-                    dialog.onClick(holder.getLayoutPosition());
-                }
-            }
-        });
     }
 
     @Override
@@ -80,6 +66,11 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         public ExpenseViewHolder(@NonNull ExpenseItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.expenseLayout.setOnClickListener(view->{
+                if (dialog != null) {
+                    dialog.onClick(getLayoutPosition());
+                }
+            });
         }
 
     }

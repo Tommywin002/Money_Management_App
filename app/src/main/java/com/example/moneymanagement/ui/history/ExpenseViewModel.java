@@ -18,8 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseViewModel extends ViewModel {
+
     private final MutableLiveData<List<Expense>> lstExpenseLiveData = new MutableLiveData<>();
     private List<Expense> lstExpense;
+
     public void getExpense(){
         lstExpense = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -41,14 +43,16 @@ public class ExpenseViewModel extends ViewModel {
                 lstExpenseLiveData.postValue(lstExpense);
             }
             else{
-
+                Log.d("Error", "Load data (Income) fail");
             }
         });
     }
+
     public LiveData<List<Expense>> getExpenseLiveData(){
         getExpense();
         return lstExpenseLiveData;
     }
+
     public void deleteExpense(String id){
         String uid = FirebaseAuth.getInstance().getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();

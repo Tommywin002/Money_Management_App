@@ -2,7 +2,6 @@ package com.example.moneymanagement.ui.accounts;
 
 import android.app.Activity;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -31,10 +30,10 @@ import java.util.Map;
 public class AccountsViewModel extends ViewModel {
 
     private final MutableLiveData<List<Account>> listAccountsLiveData = new MutableLiveData<>();
-    private List<Account> lstAccounts = new ArrayList<>();
+    private final List<Account> lstAccounts = new ArrayList<>();
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public LiveData<List<Account>> getAccountLiveData() {
+    private void getAccountLiveData() {
         String uid = FirebaseAuth.getInstance().getUid();
         db.collection("User").document(uid).collection("Account").get().addOnCompleteListener(task -> {
             lstAccounts.clear();
@@ -50,6 +49,10 @@ public class AccountsViewModel extends ViewModel {
                 Log.d("Error", "Load data (Account) fail");
             }
         });
+    }
+    
+    public LiveData<List<Account>> getData(){
+        getAccountLiveData();
         return listAccountsLiveData;
     }
 
@@ -91,7 +94,7 @@ public class AccountsViewModel extends ViewModel {
         db.collection("User").document(uid).collection("Account").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                return;
+                getAccountLiveData();
             }
         });
     }

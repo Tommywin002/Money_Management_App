@@ -55,15 +55,15 @@ public class AccountsFragment extends Fragment {
     }
 
     private void initUI() {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
         binding.revAcc.setLayoutManager(layoutManager);
         binding.revAcc.addItemDecoration(itemDecoration);
 
         binding.addAccFBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
                 navController.navigate(R.id.addUserFragment);
             }
         });
@@ -71,11 +71,10 @@ public class AccountsFragment extends Fragment {
 
     private void initViewModel() {
         accountsViewModel = new ViewModelProvider(this).get(AccountsViewModel.class);
-        accountsViewModel.getAccountLiveData().observe(requireActivity(), new Observer<List<Account>>() {
+        accountsViewModel.getData().observe(requireActivity(), new Observer<List<Account>>() {
             @Override
             public void onChanged(List<Account> accounts) {
                 accountAdapter = new AccountAdapter(getContext(), accounts);
-                binding.revAcc.setAdapter(accountAdapter);
 
                 int total = 0;
                 for(Account account : accounts){
@@ -112,37 +111,26 @@ public class AccountsFragment extends Fragment {
                         dialog.show();
                     }
                 });
+                binding.revAcc.setAdapter(accountAdapter);
             }
         });
-
     }
 
     private void editAccount(Bundle bundle) {
-        NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
         navController.navigate(R.id.detailAccountFragment, bundle);
     }
 
     private void deleteAccount(String account, String money, String id){
-        new androidx.appcompat.app.AlertDialog.Builder(getContext())
+        new androidx.appcompat.app.AlertDialog.Builder(requireActivity())
                 .setTitle("Are you sure?")
                 .setMessage("If you press 'Yes', this account will disapear.")
                 .setPositiveButton("Yes", (dialog, which) -> {
                     accountsViewModel.deleteData(account, money, id);
-                    reloadData();
+                    //reloadData();
                     dialog.dismiss();
                 })
                 .setNegativeButton("No", (dialog, which) -> dialog.dismiss()).show();
     }
 
-    private void reloadData() {
-        accountsViewModel = new ViewModelProvider(this).get(AccountsViewModel.class);
-        accountsViewModel.getAccountLiveData().observe(requireActivity(), new Observer<List<Account>>() {
-            @Override
-            public void onChanged(List<Account> accounts) {
-                accountAdapter = new AccountAdapter(getContext(), accounts);
-                accountAdapter.setDataList(accounts);
-                binding.revAcc.setAdapter(accountAdapter);
-            }
-        });
-    }
 }

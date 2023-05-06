@@ -17,7 +17,6 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import com.example.moneymanagement.R;
 import com.example.moneymanagement.model.Account;
@@ -56,8 +55,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void initUI() {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
         binding.rvTransaction.setLayoutManager(layoutManager);
         binding.rvTransaction.addItemDecoration(itemDecoration);
 
@@ -98,7 +97,7 @@ public class HomeFragment extends Fragment {
         });
 
         accountsViewModel = new AccountsViewModel();
-        accountsViewModel.getAccountLiveData().observe(requireActivity(), new Observer<List<Account>>() {
+        accountsViewModel.getData().observe(requireActivity(), new Observer<List<Account>>() {
             @Override
             public void onChanged(List<Account> accounts) {
                 int total = 0;

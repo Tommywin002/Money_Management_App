@@ -1,7 +1,6 @@
 package com.example.moneymanagement.ui.history;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -22,7 +21,8 @@ public class IncomeViewModel extends ViewModel {
 
     private final MutableLiveData<List<Income>> lstIncomeLiveData = new MutableLiveData<>();
     private List<Income> lstIncome;
-    public void getIncome(){
+
+    public void getIncome() {
         lstIncome = new ArrayList<>();
         String uid = FirebaseAuth.getInstance().getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -43,10 +43,11 @@ public class IncomeViewModel extends ViewModel {
                 lstIncomeLiveData.postValue(lstIncome);
             }
             else{
-
+                Log.d("Error", "Load data (Expense) fail");
             }
         });
     }
+
     public LiveData<List<Income>> getIncomeLiveData(){
         getIncome();
         return lstIncomeLiveData;

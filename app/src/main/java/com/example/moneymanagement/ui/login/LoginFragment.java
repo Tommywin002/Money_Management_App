@@ -18,9 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.moneymanagement.R;
-import com.example.moneymanagement.databinding.FragmentAccountsBinding;
 import com.example.moneymanagement.databinding.FragmentLoginBinding;
-import com.example.moneymanagement.ui.Login;
 import com.example.moneymanagement.ui.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,36 +26,41 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
-    private FirebaseAuth fireAuth = FirebaseAuth.getInstance();
+
+    private final FirebaseAuth fireAuth = FirebaseAuth.getInstance();
     FragmentLoginBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
     }
+
     @Override
     public void onStart() {
         super.onStart();
         checkLoginStatus();
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         login();
         register();
     }
-    public void register(){
+
+    public void register() {
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.logFragment);
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.logFragment);
                 navController.navigate(R.id.register);
-                //navController.popBackStack();
             }
         });
     }
-    public void login(){
+
+    public void login() {
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,21 +98,22 @@ public class LoginFragment extends Fragment {
             }
         });
     }
-    public void saveData(String email){
+
+    public void saveData(String email) {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("loginData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("loginCheck", true);
         editor.putString("loginEmail", email);
         editor.apply();
     }
-    public void checkLoginStatus(){
+
+    public void checkLoginStatus() {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("loginData", Context.MODE_PRIVATE);
         Boolean getCheck = sharedPreferences.getBoolean("loginCheck", Boolean.valueOf(String.valueOf(Context.MODE_PRIVATE)));
         String getEmail = sharedPreferences.getString("loginEmail", String.valueOf(Context.MODE_PRIVATE));
         if(getCheck){
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
-
         }
     }
 }

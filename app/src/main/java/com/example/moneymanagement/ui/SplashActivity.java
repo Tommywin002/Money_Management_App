@@ -28,7 +28,8 @@ public class SplashActivity extends AppCompatActivity {
         };
         thread.start();
     }
-    public void accessLogin(){
+
+    public void accessLogin() {
         Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
     }
