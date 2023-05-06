@@ -97,9 +97,6 @@ public class HistoryFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int i) {
                                 switch (i){
                                     case 0:
-                                        transactionDetail(bundle);
-                                        break;
-                                    case 1:
                                         incomeViewModel.deleteIncome(finalIncomes.get(pos).getId());
                                         break;
                                 }
@@ -112,10 +109,7 @@ public class HistoryFragment extends Fragment {
             }
         });
     }
-    private void transactionDetail(Bundle bundle) {
-        NavController navController = Navigation.findNavController(getActivity(), R.id.fragment);
-        navController.navigate(R.id.transactionFragment, bundle);
-    }
+
 
     private void initExpenseViewModel(String searchKey,int position) {
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
@@ -144,9 +138,6 @@ public class HistoryFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int i) {
                                 switch (i){
                                     case 0:
-                                        transactionDetail(bundle);
-                                        break;
-                                    case 1:
                                         expenseViewModel.deleteExpense(finalExpenses.get(pos).getId());
                                         break;
                                 }
