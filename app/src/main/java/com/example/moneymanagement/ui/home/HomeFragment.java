@@ -101,8 +101,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Account> accounts) {
                 int total = 0;
-                for(Account account : accounts){
-                    total += Integer.parseInt(account.getMoney());
+                if(accounts != null){
+                    for(Account account : accounts){
+                        total += Integer.parseInt(account.getMoney());
+                    }
+                }
+                else{
+                    total = 0;
                 }
                 binding.totalMoneyEdt.setText(String.valueOf(total));
             }
