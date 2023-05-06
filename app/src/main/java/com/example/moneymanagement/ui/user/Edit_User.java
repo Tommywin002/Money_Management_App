@@ -20,6 +20,7 @@ import com.example.moneymanagement.ui.home.transaction.TransactionFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -50,9 +51,9 @@ public class Edit_User extends Fragment {
                 update.put("gender", eGender.getText().toString());
                 update.put("birth", eBirth.getText().toString());
                 update.put("phone", ePhone.getText().toString());
-
+                String uid = FirebaseAuth.getInstance().getUid();
                 //navigateToPreviousFragment();
-                db.collection("user").document("name").set(update).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("User").document(uid).set(update).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         navigateToPreviousFragment();

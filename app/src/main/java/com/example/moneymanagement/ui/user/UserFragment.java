@@ -72,7 +72,8 @@ public class UserFragment extends Fragment {
     }
 
     private void initUI() {
-        db.collection("user").document("name")
+        String uid = FirebaseAuth.getInstance().getUid();
+        db.collection("User").document(uid)
                         .get()
                                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
