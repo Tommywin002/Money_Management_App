@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.moneymanagement.R;
+import com.example.moneymanagement.databinding.FragmentEditUserBinding;
 import com.example.moneymanagement.ui.home.transaction.TransactionFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,40 +31,34 @@ import java.util.Map;
 
 public class Edit_User extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private EditText eName, eGender, eBirth, ePhone;
-    private Button btnSave, btnCancel;
+    private FragmentEditUserBinding binding;
 
-    @SuppressLint("MissingInflatedId")
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_edit__user, container, false);
-        eName = view.findViewById(R.id.editName);
-        eBirth = view.findViewById(R.id.editBirth);
-        eGender = view.findViewById(R.id.editGender);
-        ePhone = view.findViewById(R.id.editPhone);
-        btnSave = view.findViewById(R.id.BtnSave);
-        btnCancel = view.findViewById(R.id.BtnCancel);
+        binding = FragmentEditUserBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        binding.BtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Map<String, String> update = new HashMap<>();
-                update.put("name", eName.getText().toString());
-                update.put("gender", eGender.getText().toString());
-                update.put("birth", eBirth.getText().toString());
-                update.put("phone", ePhone.getText().toString());
+                update.put("name", binding.editName.getText().toString());
+                update.put("gender", binding.editGender.getText().toString());
+                update.put("birth", binding.editBirth.getText().toString());
+                update.put("phone", binding.editPhone.getText().toString());
                 String uid = FirebaseAuth.getInstance().getUid();
                 //navigateToPreviousFragment();
                 db.collection("User").document(uid).set(update).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        System.out.println("ok");
                         navigateToPreviousFragment();
                     }
                 });
 
             }
         });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        binding.BtnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navigateToPreviousFragment();
@@ -70,8 +66,23 @@ public class Edit_User extends Fragment {
         });
         return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initData();
+    }
+
     private void navigateToPreviousFragment(){
         NavController navController = Navigation.findNavController((Activity) getContext(), R.id.fragment);
         navController.popBackStack();
+    }
+
+    private void initData(){
+        Bundle bundle = getArguments();
+        binding.editName.setText(bundle.getString("name"));
+        binding.editPhone.setText(bundle.getString("phone"));
+        binding.editBirth.setText(bundle.getString("birth"));
+        binding.editGender.setText(bundle.getString("gender"));
     }
 }

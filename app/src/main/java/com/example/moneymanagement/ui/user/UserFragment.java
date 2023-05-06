@@ -55,8 +55,14 @@ public class UserFragment extends Fragment {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("name", binding.txtUsername.getText().toString());
+                bundle.putString("birth", binding.txtBirth.getText().toString());
+                bundle.putString("gender", binding.txtGender.getText().toString());
+                bundle.putString("phone", binding.txtPhone.getText().toString());
                 NavController navController = Navigation.findNavController((Activity) getContext(),R.id.fragment);
-                navController.navigate(R.id.edit_User2);
+                navController.navigate(R.id.edit_User2, bundle);
 
             }
         });
