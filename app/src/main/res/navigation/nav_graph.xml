@@ -16,6 +16,10 @@
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_historyFragment"
+            app:destination="@id/historyFragment"
+            app:popUpTo="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountsFragment"
@@ -25,12 +29,21 @@
         <action
             android:id="@+id/action_accountsFragment_to_addUserFragment2"
             app:destination="@id/addUserFragment" />
+        <action
+            android:id="@+id/action_accountsFragment_to_detailAccountFragment"
+            app:destination="@id/detailAccountFragment"
+            app:popUpTo="@id/detailAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.moneymanagement.ui.history.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.moneymanagement.ui.user.UserFragment"
@@ -49,7 +62,7 @@
         android:id="@+id/addUserFragment"
         android:name="com.example.moneymanagement.ui.accounts.AddAccountFragment"
         android:label="fragment_add_user"
-        tools:layout="@layout/fragment_add_user" >
+        tools:layout="@layout/fragment_add_account" >
         <action
             android:id="@+id/action_addUserFragment_to_accountsFragment2"
             app:destination="@id/accountsFragment"
@@ -92,6 +105,7 @@
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" />
     <fragment
+
         android:id="@+id/edit_User2"
         android:name="com.example.moneymanagement.ui.user.Edit_User"
         android:label="fragment_edit__user"
@@ -99,5 +113,15 @@
         <action
             android:id="@+id/action_edit_User2_to_userFragment"
             app:destination="@id/userFragment" />
+    </fragment>
+  <fragment
+        android:id="@+id/detailAccountFragment"
+        android:name="com.example.moneymanagement.ui.accounts.DetailAccountFragment"
+        android:label="fragment_detail_account"
+        tools:layout="@layout/fragment_detail_account" >
+        <action
+            android:id="@+id/action_detailAccountFragment_to_accountsFragment"
+            app:destination="@id/accountsFragment"
+            app:popUpTo="@id/accountsFragment" />
     </fragment>
 </navigation>

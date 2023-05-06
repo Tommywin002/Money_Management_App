@@ -2,11 +2,8 @@ package com.example.moneymanagement.ui.home.category;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -45,22 +42,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.CategoryViewHolder holder, int position) {
-        holder.binding.categoryName.setText(categories.get(position).getName());
-        //holder.binding.cateImg.setImageResource(categories.get(position).getImgId());
-        //Glide.with(context).load(categories.get(position).getImgId()).into(holder.binding.cateImg);
+        Category category = categories.get(position);
+
+        holder.binding.categoryName.setText(category.getName());
+        Glide.with(context).load(category.getImgId()).into(holder.binding.cateImg);
+
         holder.binding.cateLayout.setOnClickListener(view->{
-            String category = holder.binding.categoryName.getText().toString();
-            String img = holder.binding.cateImg.toString();
-            String type = categories.get(position).getType();
-            Toast.makeText(context, category + " - " + type, Toast.LENGTH_SHORT).show();
-            /*Bundle bundle = new Bundle();
-            bundle.putString("cateName", category);
-            bundle.putString("cateImg", img);*/
-            DataHolder.getInstance().setCategoryName(category);
+            String categoryName = holder.binding.categoryName.getText().toString();
+            String img = category.getImgId();
+            String type = category.getType();
+
+            DataHolder.getInstance().setCategoryName(categoryName);
             DataHolder.getInstance().setImgId(img);
             DataHolder.getInstance().setType(type);
             NavController navController = Navigation.findNavController((Activity) context, R.id.fragment);
-            //navController.navigate(R.id.transactionFragment, bundle);
             navController.popBackStack();
         });
     }

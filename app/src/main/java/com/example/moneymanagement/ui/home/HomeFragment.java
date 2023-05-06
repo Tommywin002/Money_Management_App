@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.moneymanagement.R;
+import com.example.moneymanagement.model.Account;
+import com.example.moneymanagement.ui.accounts.AccountsViewModel;
 import com.example.moneymanagement.ui.home.expense.ExpenseAdapter;
 import com.example.moneymanagement.ui.home.expense.ExpenseViewModel;
 import com.example.moneymanagement.ui.home.income.IncomeAdapter;
@@ -34,7 +37,8 @@ public class HomeFragment extends Fragment {
     private ExpenseAdapter expenseAdapter;
     private IncomeViewModel incomeViewModel;
     private ExpenseViewModel expenseViewModel;
-    public static boolean check = true;
+    private AccountsViewModel accountsViewModel;
+    public static boolean check = true, check1 = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,43 +52,80 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initUI();
         initViewModel();
-        binding.rvTransaction.invalidate();
     }
 
-    private void initUI(){
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+    private void initUI() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
         binding.rvTransaction.setLayoutManager(layoutManager);
         binding.rvTransaction.addItemDecoration(itemDecoration);
 
         binding.swapImg.setOnClickListener(view->{
-            if(check == true){
-                check = false;
-                binding.rvTransaction.invalidate();
-            }
-            else if(check == false){
-                check = true;
-                binding.rvTransaction.invalidate();
-            }
+            changeData(check1);
         });
 
         binding.addFBtn.setOnClickListener(view->{
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
             navController.navigate(R.id.account_transactionFragment);
         });
+
+        binding.revealImg.setOnClickListener(view->{
+            if(binding.totalMoneyEdt.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD){
+                binding.totalMoneyEdt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD);
+                binding.revealImg.setImageResource(R.drawable.hide);
+            }
+            else{
+                binding.totalMoneyEdt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                binding.revealImg.setImageResource(R.drawable.eye);
+            }
+        });
+
+        binding.moreBtn.setOnClickListener(view->{
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment);
+            navController.navigate(R.id.historyFragment);
+        });
     }
 
-    private void initViewModel(){
+    private void initViewModel() {
+        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+        incomeViewModel.getIncomeLiveData().observe(requireActivity(), new Observer<List<Income>>() {
+            @Override
+            public void onChanged(List<Income> incomes) {
+                incomeAdapter = new IncomeAdapter(getContext(), incomes);
+                binding.rvTransaction.setAdapter(incomeAdapter);
+            }
+        });
 
-        if(check == true){
+        accountsViewModel = new AccountsViewModel();
+        accountsViewModel.getData().observe(requireActivity(), new Observer<List<Account>>() {
+            @Override
+            public void onChanged(List<Account> accounts) {
+                int total = 0;
+                if(accounts != null){
+                    for(Account account : accounts){
+                        total += Integer.parseInt(account.getMoney());
+                    }
+                }
+                else{
+                    total = 0;
+                }
+                binding.totalMoneyEdt.setText(String.valueOf(total));
+            }
+        });
+    }
+
+    private void changeData(boolean checked) {
+        if(check != checked){
             incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
             incomeViewModel.getIncomeLiveData().observe(requireActivity(), new Observer<List<Income>>() {
                 @Override
                 public void onChanged(List<Income> incomes) {
                     incomeAdapter = new IncomeAdapter(getContext(), incomes);
+                    incomeAdapter.setDatalist(incomes);
                     binding.rvTransaction.setAdapter(incomeAdapter);
                 }
             });
+            check = true;
         }
         else{
             expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
@@ -92,16 +133,12 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onChanged(List<Expense> expenses) {
                     expenseAdapter = new ExpenseAdapter(getContext(), expenses);
+                    expenseAdapter.setDatalist(expenses);
                     binding.rvTransaction.setAdapter(expenseAdapter);
                 }
             });
+            check = false;
         }
-
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        binding.rvTransaction.invalidate();
-    }
 }

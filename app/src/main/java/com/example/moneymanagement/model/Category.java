@@ -4,10 +4,10 @@ public class Category {
 
     private String id;
     private String name;
-    private int imgId;
+    private String imgId;
     private String type;
 
-    public Category(String name, int imgId, String type) {
+    public Category(String name, String imgId, String type) {
         this.name = name;
         this.imgId = imgId;
         this.type = type;
@@ -29,11 +29,11 @@ public class Category {
         this.name = name;
     }
 
-    public int getImgId() {
+    public String getImgId() {
         return imgId;
     }
 
-    public void setImgId(int imgId) {
+    public void setImgId(String imgId) {
         this.imgId = imgId;
     }
 

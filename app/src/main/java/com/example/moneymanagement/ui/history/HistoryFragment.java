@@ -1,8 +1,16 @@
 package com.example.moneymanagement.ui.history;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
@@ -11,52 +19,142 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 
-import android.widget.Spinner;
-import android.widget.TextView;
-
+import com.example.moneymanagement.databinding.FragmentHistoryBinding;
 import com.example.moneymanagement.model.Expense;
-import com.example.moneymanagement.R;
-import java.util.ArrayList;
+import com.example.moneymanagement.model.Income;
+import com.example.moneymanagement.ui.home.expense.ExpenseAdapter;
+import com.example.moneymanagement.ui.home.income.IncomeAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the  factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+
 public class HistoryFragment extends Fragment {
 
-    private TextView incometxt, outtxt;
-
-    private EditText eSearch;
-    private ArrayList<Expense> list;
-    private RecyclerView recyclerView;
-    public boolean checked = false;
-
-    private Spinner spSapXep;
-    private int lastSelected = -1;
-
+    private FragmentHistoryBinding binding;
+    private ExpenseAdapter expenseAdapter;
+    private IncomeAdapter incomeAdapter;
+    private ExpenseViewModel expenseViewModel;
+    private IncomeViewModel incomeViewModel;
+    private int lastSelected = 0;
+    private boolean incomeSelected = true;
+    private String searchKey = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_history, container, false);
-        recyclerView = view.findViewById(R.id.rvTransactionHistory);
-        eSearch = view.findViewById(R.id.edtSearch);
-        incometxt = view.findViewById(R.id.inTxt);
-        outtxt = view.findViewById(R.id.exTxt);
-        spSapXep = view.findViewById(R.id.spinner2);
-        String[] options = {"Tăng dần", "Giảm dần"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, options);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spSapXep.setAdapter(adapter);
+        binding = FragmentHistoryBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        return view;
+    }
 
-        spSapXep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initUI();
+        initIncomeViewModel(searchKey,lastSelected);
+    }
+
+    private void initIncomeViewModel(String searchKey,int position) {
+        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+        incomeViewModel.getIncomeLiveData().observe(requireActivity(), new Observer<List<Income>>() {
+            @Override
+            public void onChanged(List<Income> incomes) {
+                if (!Objects.equals(searchKey, "")){
+                    incomes = searchIncome(searchKey, incomes);
+                }
+                incomeAdapter = new IncomeAdapter(getContext(), sortIncome(incomes,position) );
+                List<Income> finalIncomes = incomes;
+                incomeAdapter.setDialog(new IncomeAdapter.Dialog() {
+                    @Override
+                    public void onClick(int pos) {
+                        final CharSequence[] dialogItem = {"Delete"};
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                        dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                switch (i){
+                                    case 0:
+
+                                        break;
+                                    case 1:
+                                        incomeViewModel.deleteIncome(finalIncomes.get(pos).getId());
+                                        break;
+                                }
+                            }
+                        });
+                        dialog.show();
+                    }
+                });
+                binding.rvTransactionHistory.setAdapter(incomeAdapter);
+            }
+        });
+    }
+
+
+    private void initExpenseViewModel(String searchKey,int position) {
+        expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
+        expenseViewModel.getExpenseLiveData().observe(requireActivity(), new Observer<List<Expense>>() {
+            @Override
+            public void onChanged(List<Expense> expenses) {
+                if (!Objects.equals(searchKey, "")){
+                    expenses = searchExpense(searchKey,expenses);
+                }
+                expenseAdapter = new ExpenseAdapter(getContext(), sortExpense(expenses,position));
+                List<Expense> finalExpenses = expenses;
+                expenseAdapter.setDialog(new ExpenseAdapter.Dialog() {
+                    @Override
+                    public void onClick(int pos) {
+                        final CharSequence[] dialogItem = {"Delete"};
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                        dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                switch (i){
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        expenseViewModel.deleteExpense(finalExpenses.get(pos).getId());
+                                        break;
+                                }
+                            }
+                        });
+                        dialog.show();
+                    }
+                });
+                binding.rvTransactionHistory.setAdapter(expenseAdapter);
+            }
+        });
+    }
+    private void initUI() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        binding.rvTransactionHistory.setLayoutManager(layoutManager);
+        binding.rvTransactionHistory.addItemDecoration(itemDecoration);
+
+        binding.exTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initExpenseViewModel(searchKey, lastSelected);
+                incomeSelected = false;
+            }
+        });
+        binding.inTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initIncomeViewModel(searchKey, lastSelected);
+                incomeSelected = true;
+            }
+        });
+        binding.spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 lastSelected = position;
+                if (incomeSelected) initIncomeViewModel(searchKey, lastSelected);
+                else initExpenseViewModel(searchKey, lastSelected);
             }
 
             @Override
@@ -64,8 +162,7 @@ public class HistoryFragment extends Fragment {
 
             }
         });
-
-        eSearch.addTextChangedListener(new TextWatcher() {
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -73,12 +170,9 @@ public class HistoryFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(checked == false){
-                    searchExpense(s.toString());
-                }
-                if(checked == true){
-                    searchIncome(s.toString());
-                }
+                searchKey = String.valueOf(binding.edtSearch.getText());
+                if (incomeSelected) initIncomeViewModel(searchKey, lastSelected);
+                else initExpenseViewModel(searchKey, lastSelected);
             }
 
             @Override
@@ -86,71 +180,77 @@ public class HistoryFragment extends Fragment {
 
             }
         });
-
-
-
-        incometxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                checked = true;
-            }
-        });
-        outtxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                checked = false;
-            }
-        });
-
-        return view;
+    }
+    public List<Income> sortIncome(List<Income> lstIncome, int position) {
+        if (position==1){
+            Collections.sort(lstIncome, new Comparator<Income>() {
+                @Override
+                public int compare(Income e1, Income e2) {
+                    return Integer.compare(Integer.parseInt(e1.getMoney()),Integer.parseInt(e2.getMoney()));
+                }
+            });
+        }
+        if (position==2){
+            Collections.sort(lstIncome, new Comparator<Income>() {
+                @Override
+                public int compare(Income e1, Income e2) {
+                    return Integer.compare(Integer.parseInt(e2.getMoney()),Integer.parseInt(e1.getMoney()));
+                }
+            });
+        }
+        return lstIncome;
     }
 
-    public void searchIncome(String text){
-       /* ArrayList<Transaction> search = new ArrayList<>();
-        ArrayList<String> searchKey = new ArrayList<>();
-        for(String k : IncomeVIewModel.ks){
-            searchKey.add(k);
+    public List<Expense> sortExpense(List<Expense> lstExpense, int position) {
+        if (position==1){
+            Collections.sort(lstExpense, new Comparator<Expense>() {
+                @Override
+                public int compare(Expense e1, Expense e2) {
+                    return Integer.compare(Integer.parseInt(e1.getMoney()),Integer.parseInt(e2.getMoney()));
+                }
+            });
         }
-        for(Transaction ts : IncomeVIewModel.income){
+        if (position==2){
+            Collections.sort(lstExpense, new Comparator<Expense>() {
+                @Override
+                public int compare(Expense e1, Expense e2) {
+                    return Integer.compare(Integer.parseInt(e2.getMoney()),Integer.parseInt(e1.getMoney()));
+                }
+            });
+        }
+        return lstExpense;
+    }
+
+    public List<Income> searchIncome(String text, List<Income> lstIncome) {
+        ArrayList<Income> search = new ArrayList<>();
+        for(Income ts : lstIncome){
             if(ts.getCategory().toLowerCase().contains(text.toLowerCase())){
                 search.add(ts);
             }
-            else if(ts.getMoney().contains(text.toString())){
+            else if(ts.getMoney().contains(text)){
                 search.add(ts);
             }
             else if(ts.getAccount().toLowerCase().contains(text.toLowerCase())){
                 search.add(ts);
             }
         }
-        incomeAdapter.setDataList(search, searchKey);
-        incomeAdapter.notifyDataSetChanged();
-        recyclerView.setAdapter(incomeAdapter);*/
+       return search;
     }
 
-    public void searchExpense(String text){
-        /*ArrayList<Transaction> search = new ArrayList<>();
-        ArrayList<String> searchKey = new ArrayList<>();
-        for(String k : ExpendViewModel.ks){
-            searchKey.add(k);
-        }
-        for(Transaction ts : ExpendViewModel.expense){
+    public List<Expense> searchExpense(String text, List<Expense> lstExpense) {
+        ArrayList<Expense> search = new ArrayList<>();
+        for(Expense ts : lstExpense){
             if(ts.getCategory().toLowerCase().contains(text.toLowerCase())){
                 search.add(ts);
             }
-            else if(ts.getMoney().contains(text.toString())){
+            else if(ts.getMoney().contains(text)){
                 search.add(ts);
             }
             else if(ts.getAccount().toLowerCase().contains(text.toLowerCase())){
                 search.add(ts);
             }
         }
-        transactionAdapter.setDataList(search, searchKey);
-        transactionAdapter.notifyDataSetChanged();
-        recyclerView.setAdapter(transactionAdapter);*/
+        return search;
     }
 
 }
-
-

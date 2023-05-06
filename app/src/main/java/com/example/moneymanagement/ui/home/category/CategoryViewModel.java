@@ -19,7 +19,7 @@ public class CategoryViewModel extends ViewModel {
     private MutableLiveData<List<Category>> lstCategoryLiveData = new MutableLiveData<>();
     private List<Category> lstCategory;
 
-    public LiveData<List<Category>> getCategoryLiveData(){
+    public LiveData<List<Category>> getCategoryLiveData() {
         lstCategory = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Category").get().addOnCompleteListener(task ->  {
@@ -29,7 +29,7 @@ public class CategoryViewModel extends ViewModel {
                     String name = documentSnapshot.getString("name");
                     String imgId = documentSnapshot.getString("imgId");
                     String type = documentSnapshot.getString("type");
-                    Category category = new Category(name, Integer.parseInt(imgId), type);
+                    Category category = new Category(name, imgId, type);
                     category.setId(documentSnapshot.getId());
                     lstCategory.add(category);
                 }

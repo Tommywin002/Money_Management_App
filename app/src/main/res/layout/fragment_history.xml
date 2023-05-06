@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray2"
     tools:context=".ui.history.HistoryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,11 +23,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/blue2"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/edtSearch"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
@@ -34,6 +36,8 @@
                     android:inputType="textPersonName"
                     android:paddingLeft="20dp"
                     android:textSize="24sp" />
+
+
 
             </LinearLayout>
         </LinearLayout>
@@ -49,7 +53,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/blue2">
 
                 <TextView
                     android:id="@+id/inTxt"
@@ -95,7 +100,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
                     app:layout_constraintStart_toEndOf="@+id/exTxt"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:entries="@array/sort_array"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
@@ -104,9 +110,9 @@
             android:id="@+id/linearLayout8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="5dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
