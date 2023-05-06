@@ -83,14 +83,7 @@ public class HistoryFragment extends Fragment {
                 incomeAdapter.setDialog(new IncomeAdapter.Dialog() {
                     @Override
                     public void onClick(int pos) {
-                        final CharSequence[] dialogItem = {"Detail","Delete"};
-                        String account = finalIncomes.get(pos).getAccount();
-                        String money = finalIncomes.get(pos).getMoney();
-                        String id = finalIncomes.get(pos).getId();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("account", account);
-                        bundle.putString("money", money);
-                        bundle.putString("id", id);
+                        final CharSequence[] dialogItem = {"Delete"};
                         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                         dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
                             @Override
@@ -124,14 +117,7 @@ public class HistoryFragment extends Fragment {
                 expenseAdapter.setDialog(new ExpenseAdapter.Dialog() {
                     @Override
                     public void onClick(int pos) {
-                        final CharSequence[] dialogItem = {"Detail","Delete"};
-                        String account = finalExpenses.get(pos).getAccount();
-                        String money = finalExpenses.get(pos).getMoney();
-                        String id = finalExpenses.get(pos).getId();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("account", account);
-                        bundle.putString("money", money);
-                        bundle.putString("id", id);
+                        final CharSequence[] dialogItem = {"Delete"};
                         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                         dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
                             @Override
