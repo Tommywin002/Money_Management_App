@@ -7,7 +7,11 @@ public class User {
     private String birth;
     private String phone;
 
-    public User() {
+    public User(String name, String gender, String birth, String phone) {
+        this.name = name;
+        this.gender = gender;
+        this.birth = birth;
+        this.phone = phone;
     }
 
     public String getName() {

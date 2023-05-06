@@ -52,6 +52,7 @@ public class AddAccountFragment extends Fragment {
                 newAccount.put("Name", binding.accNameEdt.getText().toString().trim());
                 newAccount.put("Money", binding.accNumberEdt.getText().toString().trim());
                 accountsViewModel.addData(newAccount);
+
             }
 
         });
