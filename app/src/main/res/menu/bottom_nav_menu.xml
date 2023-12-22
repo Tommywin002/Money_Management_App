@@ -15,10 +15,7 @@
         android:id="@+id/historyFragment"
         android:icon="@drawable/history"/>
 
-    <item
-        android:title="User"
-        android:id="@+id/userFragment"
-        android:icon="@drawable/user"/>
+
 
     <item
         android:title="Setting"

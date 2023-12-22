@@ -29,12 +29,6 @@ public class SettingFragment extends Fragment { FragmentSettingBinding binding;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.languageCL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         signOut();
     }
     public void signOut(){
